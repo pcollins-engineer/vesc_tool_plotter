@@ -1,0 +1,18 @@
+<html>
+<head>
+    <title>VESC Tool Plotter</title>
+</head>
+<body>
+    <h1>VESC Tool Plotter</h1>
+    <hr>
+    <h2>Upload Log File</h2>
+    <form method="POST" action="upload" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="log_file"" accept=".csv"/>
+        <input type="submit"/>
+    </form>
+</body>
+
+
+</html>
+
