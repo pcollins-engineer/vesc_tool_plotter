@@ -7,6 +7,7 @@ The VESC Tool logs data from VESC to CSV file on Android devices.
 See:
 
   https://github.com/vedderb/vesc_tool
+  
   https://play.google.com/store/apps/details?id=vedder.vesctool
  
  
