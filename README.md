@@ -11,5 +11,5 @@ See:
 - https://play.google.com/store/apps/details?id=vedder.vesctool
  
  
-VESC Tool Plotter parses CSV log files and rider notes to create interactive plots detailing VESC sensor values.
-The plots have a unique link and can be shared with others to aid collaboration.
+VESC Tool Plotter parses CSV log files and rider notes to create interactive plots.
+The plots have a unique link and can be shared.
