@@ -10,8 +10,17 @@
     <table border="1">
 
         <tr>
-            <td>{{ test }}</td>
+            {% for value in header %}
+                <th>{{ value }}</th>
+            {% endfor %}
         </tr>
+        {% for row in data %}
+            <tr>
+                {% for value in row %}
+                    <td>{{ value }}</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
     </table>
 </body>
 
