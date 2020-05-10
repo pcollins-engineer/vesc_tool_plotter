@@ -1,29 +1,259 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <title>VESC Tool Plotter</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="test.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script>
+    //put graph generation code here
+
+    //On load function, get our data and do any setup required
+    $(document).ready(function() {
+        //sample data, real data will be loaded from database
+        var importedData = '{{mydata|safe}}';
+        var parsedData = JSON.parse(importedData)
+        var header = parsedData.header
+        var data = parsedData.data
+        // for(var i in data) {
+        //     data[i] = data[i].slice(0,5)
+        // }
+        var timeStamp = data[0][0]
+      
+
+        // data = {
+        //   header: ['time', 'current', 'rpm', 'duty''voltage'],
+        //   data : [['0','1285.76','7200','10','6000.56'], ['1', ]]
+        // }
+      
+        // data = [
+        // {
+        //  'time': 0,
+        //  'current': 1285.76,
+        //  'rpm': 7200,
+        //  'duty': 10,
+        //  'voltage': 6000.56
+        // },
+        // {
+        //  'time': 1,
+        //  'current': 1685.76,
+        //  'rpm': 7400,
+        //  'duty': 20,
+        //  'voltage': 6060.59
+        // },
+        // {
+        //  'time': 2,
+        //  'current': 1285.76,
+        //  'rpm': 7200,
+        //  'duty': 30,
+        //  'voltage': 6000.56
+        // },
+        // {
+        //  'time': 3,
+        //  'current': 1285.76,
+        //  'rpm': 7200,
+        //  'duty': 40,
+        //  'voltage': 6000.56
+        // },
+        // {
+        //  'time': 4,
+        //  'current': 1285.76,
+        //  'rpm': 7200,
+        //  'duty': 50,
+        //  'voltage': 6000.56
+        // },
+        // {
+        //  'time': 5,
+        //  'current': 1285.76,
+        //  'rpm': 7200,
+        //  'duty': 60,
+        //  'voltage': 6000.56
+        // },
+        // {
+        //  'time': 6,
+        //  'current': 1285.76,
+        //  'rpm': 7200,
+        //  'duty': 70,
+        //  'voltage': 6000.56
+        // },
+        // {
+        //  'time': 7,
+        //  'current': 1285.76,
+        //  'rpm': 7200,
+        //  'duty': 80,
+        //  'voltage': 6000.56
+        // },
+        // {
+        //  'time': 8,
+        //  'current': 1285.76,
+        //  'rpm': 7200,
+        //  'duty': 90,
+        //  'voltage': 6000.56
+        // },
+        // {
+        //  'time': 9,
+        //  'current': 1285.76,
+        //  'rpm': 7200,
+        //  'duty': 100,
+        //  'voltage': 6000.56
+        // }]
+
+//      var dataIncluded = [];
+//      data.header.map(header => {
+//          if (header !== 'time')
+//              dataIncluded.push(header);
+//      })
+        
+//          console.log(dataIncluded);
+      
+        //generate data for chart ** NOT IN FUNCTION ** WE ONLY WANT TO DO THIS ONCE
+        var newData = [];
+        var axisY = [];
+        for(var i in header) {
+            if (i == 0){
+              continue;
+            }
+            newData.push({
+                type:"line",
+                name: header[i],
+                showInLegend: true,
+                markerSize: 0,
+                axisYIndex: parseInt(i - 1),
+                dataPoints: []
+            })
+            axisY.push({
+                title: "",
+                tickLength: 0,
+                lineThickness:0,
+                margin:0,
+                labelFormatter: function(e) {
+                  return "";
+                }
+            })
+        }
+
+        // newData[k-1] matches k key:value pair of data[j]
+        // Essentially bruteforcing it use for another data structure here?
+        for(var j in data) {
+            //console.log("j" + j);
+            for(var k in data[j]){
+                //console.log({x:data[j]['time'], y:data[j][key]});
+                if (k != 0){
+                    var newTime = data[j][0] - timeStamp
+                    newData[k-1].dataPoints.push({x:newTime, y:parseFloat(data[j][k])})
+                }
+            }
+        }
+        generateChart([]);
+        // chart.options.data[0].visible = false;
+        //chart.render();
+        //DONE
+
+
+
+
+
+
+
+
+        //
+        //
+        // FUNCTIONS
+        //
+        //
+        // Generates chart
+        function generateChart(selected) {
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+                title: {
+                    text: "Your e-Foil"
+                },
+                axisX: {
+                    title: "Time",
+                    suffix: "s"
+                },
+                axisY: axisY,
+                toolTip: {
+                    shared: true
+                },
+                legend: {
+                    cursor: "pointer",
+                    verticalAlign: "top",
+                    horizontalAlign: "center",
+                    dockInsidePlotArea: true
+                },
+
+                data: newData
+            });
+
+            // check if selected has values - initially empty
+            if (selected.length > 0){
+                for (var i in dataIncluded){
+                    if (!selected.includes(dataIncluded[i])){ //if checked in checkbox
+                        chart.options.data[i].visible = false;
+                    } else {
+                        chart.options.data[i].visible = true;
+                    }
+                }
+            }
+            console.log(newData)
+            chart.render()
+        }
+
+
+
+
+
+
+
+         // Determines which data has been selected for viewing -> () => array
+         function displayData() {
+            var selectedData = [];
+            $(".form-check-input").each(function() {
+                if($(this).is(":checked")){
+                    selectedData.push($(this).val())
+                }
+            })
+            return selectedData;
+         }
+
+
+
+
+        // Runs when the generate button is clicked.  Calls generateChart with the selected elements
+        $("#generateButton").click(function() {
+            var selected = displayData()
+            console.log(selected);
+            generateChart(selected);
+        })
+
+})
+
+
+</script>
 </head>
 <body>
-    <h1>VESC Tool Plotter</h1>
-    <hr>
-    <h2>Plot</h2>
-    
-    <table border="1">
-
-        <tr>
-            {% for value in header %}
-                <th>{{ value }}</th>
-            {% endfor %}
-        </tr>
-        {% for row in data %}
-            <tr>
-                {% for value in row %}
-                    <td>{{ value }}</td>
-                {% endfor %}
-            </tr>
-        {% endfor %}
-    </table>
+    <div class="wrapper">
+        <div id="selectContainer">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="current">
+                <label class="form-check-label" for="1">current</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="rpm">
+                <label class="form-check-label" for="2">rpm</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="duty">
+                <label class="form-check-label" for="3">duty</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="voltage">
+                <label class="form-check-label" for="4">voltage</label>
+            </div>
+            <div><button type="submit" id="generateButton">Generate</button></div>
+        </div>
+        <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+    </div>
 </body>
-
-
 </html>
-

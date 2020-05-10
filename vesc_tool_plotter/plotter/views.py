@@ -1,5 +1,6 @@
 import csv
 from django.shortcuts import render, HttpResponse
+import json
 
 # Create your views here.
 
@@ -23,4 +24,5 @@ def upload(request):
             "header": header,
             "data": data
         }
-    return render(request, "table.html", template_data)
+        send_data = json.dumps(template_data)
+    return render(request, "table.html", context={"mydata": send_data})
