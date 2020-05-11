@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Foil(models.Model):
     title = models.CharField('foil title', max_length=50)
-    description = models.CharField('foil description', max_length=200)
+    description = models.CharField('foil description', null=True, max_length=200)
 
     def __str__(self):
         return self.title
@@ -14,7 +14,7 @@ class Foil(models.Model):
 
 class Board(models.Model):
     title = models.CharField('board title', max_length=50)
-    description = models.CharField('board description', max_length=200)
+    description = models.CharField('board description', null=True, max_length=200)
 
     def __str__(self):
         return self.title
@@ -24,7 +24,7 @@ class Board(models.Model):
 
 class Motor(models.Model):
     title = models.CharField('motor title', max_length=50)
-    description = models.CharField('motor description', max_length=200)
+    description = models.CharField('motor description', null=True, max_length=200)
 
     def __str__(self):
         return self.title
@@ -34,7 +34,7 @@ class Motor(models.Model):
 
 class Propellor(models.Model):
     title = models.CharField('propellor title', max_length=50)
-    description = models.CharField('propellor description', max_length=200)
+    description = models.CharField('propellor description', null=True, max_length=200)
 
     def __str__(self):
         return self.title
@@ -44,7 +44,7 @@ class Propellor(models.Model):
 
 class Controller(models.Model):
     title = models.CharField('controller title', max_length=50)
-    description = models.CharField('controller description', max_length=200)
+    description = models.CharField('controller description', null=True, max_length=200)
 
     def __str__(self):
         return self.title
@@ -54,13 +54,13 @@ class Controller(models.Model):
 
 class Build(models.Model):
     title = models.CharField('foil title', max_length=50)
-    description = models.CharField('foil description', max_length=200)
-    author_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='build')
-    foil_id = models.ForeignKey(Foil, on_delete=models.CASCADE, related_name='build')
-    board_id = models.ForeignKey(Board, on_delete=models.CASCADE, related_name='build')
-    motor_id = models.ForeignKey(Motor, on_delete=models.CASCADE, related_name='build')
-    propellor_id = models.ForeignKey(Propellor, on_delete=models.CASCADE, related_name='build')
-    controller_id = models.ForeignKey(Controller, on_delete=models.CASCADE, related_name='build')
+    description = models.CharField('foil description', null=True, max_length=200)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='build')
+    foil = models.ForeignKey(Foil, on_delete=models.CASCADE, related_name='build')
+    board = models.ForeignKey(Board, on_delete=models.CASCADE, related_name='build')
+    motor = models.ForeignKey(Motor, on_delete=models.CASCADE, related_name='build')
+    propellor = models.ForeignKey(Propellor, on_delete=models.CASCADE, related_name='build')
+    controller = models.ForeignKey(Controller, on_delete=models.CASCADE, related_name='build')
 
     def __str__(self):
         return self.title
@@ -70,9 +70,9 @@ class Build(models.Model):
 
 # Ride data for V 0.1
 class Ride(models.Model):
-    rider_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='ride')
+    rider = models.ForeignKey(User, on_delete=models.CASCADE, related_name='ride')
     title = models.CharField('ride title', max_length=50)
-    description = models.CharField('ride description', max_length=200)
+    description = models.CharField('ride description', null=True, max_length=200)
     ride_date = models.DateField('date of ride')
     build = models.ForeignKey(Build, models.SET_NULL, null=True, related_name='ride')
     pub_date = models.DateField('date uploaded', False, True) # Automatically sets

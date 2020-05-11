@@ -2,7 +2,7 @@ import csv
 from django.shortcuts import render, HttpResponse
 import json
 
-accepted_data_set = {
+ACCEPTED_DATA_SET = {
     "temp_motor",
     "current_motor",
     "current_in",
@@ -17,7 +17,7 @@ accepted_data_set = {
 }
 
 def upload(request):
-    return render(request, "plotter/upload.html", context={'accepted_data_set':accepted_data_set})
+    return render(request, "plotter/upload.html", context={'accepted_data_set':ACCEPTED_DATA_SET})
 
 def graph(request):
     template_data = {}
@@ -37,7 +37,7 @@ def graph(request):
             if index == 0:
                 dataMap[index] = head
                 header.append(head)
-            if head in accepted_data_set:
+            if head in ACCEPTED_DATA_SET:
                 dataMap[index] = head
                 header.append(head)
 
@@ -65,3 +65,6 @@ def graph(request):
 
 def profile(request):
     return render(request, "plotter/profile.html", {})
+
+def add_build(request):
+    return render(request, "plotter/add_build.html", {})
