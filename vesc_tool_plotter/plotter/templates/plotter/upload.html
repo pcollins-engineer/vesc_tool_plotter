@@ -1,0 +1,22 @@
+{% extends "../base.html" %}
+{% block title %}Upload{% endblock title %}
+{% block content %}
+  <h1>VESC Tool Plotter</h1>
+  <hr>
+  <h2>Upload Log File</h2>
+  <form method="POST" action="graph" enctype="multipart/form-data">
+      {% csrf_token %}
+      <input type="file" name="log_file" accept=".csv"/>
+      <button class="wave-effect wave btn" type="submit">Graph</button>
+  </form>
+  <h2> Accepted Data for Graphing (everything else be parsed out) </h2>
+  {% if accepted_data_set %}
+    <ul>
+    {% for item in accepted_data_set %}
+      <li><p>{{ item }}</p></li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <p>Accepted cannot be displayed at this time.</p>
+  {% endif %}
+{% endblock content %}

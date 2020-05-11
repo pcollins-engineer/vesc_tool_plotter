@@ -28,7 +28,7 @@ def loginPage(request):
 		user = authenticate(request, username=username, password=password)
 		if user is not None:
 			login(request, user)
-			return redirect('base_site:index')
+			return redirect('/upload')
 		else:
 			messages.info(request, 'Username or Password is incorrect')
 	context = {}
@@ -36,4 +36,4 @@ def loginPage(request):
 
 def logoutUser(request):
 	logout(request)
-	return redirect('base_site:index')
+	return redirect('accounts:login')

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}Home{% endblock title %} | e-Monitor</title>
+        {% block head_favicon %}
+           <link rel="icon" type="image/png"
+                 href="{{ STATIC_URL }}images/favicon.ico">
+        {% endblock head_favicon %}
+        {% block head_meta %}
+            {% block head_meta_charset %}
+                <meta http-equiv="Content-Type"
+                      content="text/html; charset=utf-8" />
+            {% endblock head_meta_charset %}
+            {% block head_meta_contentlanguage %}
+                <meta http-equiv="Content-Language" value="en-US" />
+            {% endblock head_meta_contentlanguage %}
+            {% block head_meta_viewport %}
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            {% endblock head_meta_viewport %}
+        {% endblock head_meta %}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        {% block head_css %}
+        {% endblock head_css %}
+    </head>
+    <body>
+      <header>
+        <div class="navbar-fixed">
+          <nav>
+            <div class="nav-wrapper grey darken-3">
+              <ul class="left hide-on-med-and-down">
+                <li><a href="#"><i class="large material-icons">toys</i></a></li>
+              </ul>
+              <a href="#" data-target="mobile" class="sidenav-trigger"><i class="material-icons">menu</i> * Does not work *</a>
+              <ul class="right hide-on-med-and-down">
+                <li><a href="/upload">upload</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="/profile"><i class="large material-icons right">account_box</i>account</a></li>
+                    <li><a href="/logout" class="wave-effect wave btn">logout</a></li>
+                {% else %}
+                    <li><a href="/login" class="wave-effect wave btn m-r-none">login</a></li>
+                    <li><a href="/register" class="wave-effect wave btn">sign Up</a></li>
+                {% endif %}
+              </ul>
+            </div>
+          </nav>
+        </div>
+        <ul class="sidenav" id="mobile">
+          <li><a href="/upload">upload</a></li>
+          {% if user.is_authenticated %}
+              <li><a href="/profile"><i class="large material-icons right">account_box</i>account</a></li>
+              <li><a href="/logout" class="wave-effect wave btn">logout</a></li>
+          {% else %}
+              <li><a href="/login" class="wave-effect wave btn m-r-none">login</a></li>
+              <li><a href="/register" class="wave-effect wave btn">sign Up</a></li>
+          {% endif %}
+        </ul>
+      </header>
+      {% block content %}
+        This should not be visible - check HTML
+      {% endblock content %}
+    </body>
+    {% block footer_scripts %}
+    <script type="text/javascript" src="../static/plotter/js/navbar.js"></script>
+    {% endblock footer_scripts %}
+</html>
