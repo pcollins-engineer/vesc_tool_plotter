@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'plotter',
+    'crispy_forms',
     'accounts.apps.AccountsConfig',
 ]
 

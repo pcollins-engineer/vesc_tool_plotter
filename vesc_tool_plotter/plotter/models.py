@@ -70,7 +70,7 @@ class Build(models.Model):
 
 # Ride data for V 0.1
 class Ride(models.Model):
-    rider = models.ForeignKey(User, on_delete=models.CASCADE, related_name='ride')
+    rider = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='ride')
     title = models.CharField('ride title', max_length=50)
     description = models.CharField('ride description', null=True, max_length=200)
     ride_date = models.DateField('date of ride')
