@@ -32,15 +32,15 @@ class Motor(models.Model):
     class Meta:
         db_table = 'motors'
 
-class Propellor(models.Model):
-    title = models.CharField('propellor title', max_length=50)
-    description = models.CharField('propellor description', null=True, max_length=200)
+class Propeller(models.Model):
+    title = models.CharField('propeller title', max_length=50)
+    description = models.CharField('propeller description', null=True, max_length=200)
 
     def __str__(self):
         return self.title
 
     class Meta:
-        db_table = 'propellors'
+        db_table = 'propellers'
 
 class Controller(models.Model):
     title = models.CharField('controller title', max_length=50)
@@ -55,12 +55,12 @@ class Controller(models.Model):
 class Build(models.Model):
     title = models.CharField('foil title', max_length=50)
     description = models.CharField('foil description', null=True, max_length=200)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='build')
-    foil = models.ForeignKey(Foil, on_delete=models.CASCADE, related_name='build')
-    board = models.ForeignKey(Board, on_delete=models.CASCADE, related_name='build')
-    motor = models.ForeignKey(Motor, on_delete=models.CASCADE, related_name='build')
-    propellor = models.ForeignKey(Propellor, on_delete=models.CASCADE, related_name='build')
-    controller = models.ForeignKey(Controller, on_delete=models.CASCADE, related_name='build')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='build')
+    foil = models.ForeignKey(Foil, on_delete=models.CASCADE, null=True, related_name='build')
+    board = models.ForeignKey(Board, on_delete=models.CASCADE, null=True, related_name='build')
+    motor = models.ForeignKey(Motor, on_delete=models.CASCADE, null=True, related_name='build')
+    propeller = models.ForeignKey(Propeller, on_delete=models.CASCADE, null=True, related_name='build')
+    controller = models.ForeignKey(Controller, on_delete=models.CASCADE, null=True, related_name='build')
 
     def __str__(self):
         return self.title
@@ -74,6 +74,7 @@ class Ride(models.Model):
     title = models.CharField('ride title', max_length=50)
     description = models.CharField('ride description', null=True, max_length=200)
     ride_date = models.DateField('date of ride')
+    location = models.CharField('location', null=True, max_length=50)
     build = models.ForeignKey(Build, models.SET_NULL, null=True, related_name='ride')
     pub_date = models.DateField('date uploaded', False, True) # Automatically sets
 
@@ -84,6 +85,7 @@ class Ride(models.Model):
         db_table = 'rides'
 
 class CsvRow(models.Model):
+    ride = models.ForeignKey(Ride, on_delete=models.CASCADE, related_name='row')
     ms_time = models.IntegerField()
     temp_motor = models.DecimalField(max_digits=10, decimal_places=4, null=True)
     current_motor = models.DecimalField(max_digits=10, decimal_places=4, null=True)

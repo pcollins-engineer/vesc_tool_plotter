@@ -17,9 +17,9 @@ class MotorForm(ModelForm):
         model = models.Motor
         fields = ['title', 'description']
 
-class PropellorForm(ModelForm):
+class PropellerForm(ModelForm):
     class Meta:
-        model = models.Propellor
+        model = models.Propeller
         fields = ['title', 'description']
 
 class ControllerForm(ModelForm):
@@ -30,7 +30,7 @@ class ControllerForm(ModelForm):
 class RideForm(ModelForm):
     class Meta:
         model = models.Ride
-        fields = ['title', 'description', 'ride_date', 'build']
+        fields = ['title', 'description', 'ride_date', 'location']
 
 class BuildForm(ModelForm):
     class Meta:

@@ -1,22 +1,37 @@
 {% extends "../base.html" %}
 {% block title %}Upload{% endblock title %}
 {% block content %}
-  <h1>VESC Tool Plotter</h1>
-  <hr>
-  <h2>Upload Log File</h2>
-  <form method="POST" action="graph" enctype="multipart/form-data">
-      {% csrf_token %}
-      <input type="file" name="log_file" accept=".csv"/>
-      <button class="wave-effect wave btn" type="submit">Graph</button>
-  </form>
-  <h2> Accepted Data for Graphing (everything else be parsed out) </h2>
-  {% if accepted_data_set %}
-    <ul>
-    {% for item in accepted_data_set %}
-      <li><p>{{ item }}</p></li>
-    {% endfor %}
-    </ul>
-  {% else %}
-    <p>Accepted cannot be displayed at this time.</p>
-  {% endif %}
+  <div class="container">
+      <div class='row m-elevation z-depth-3'>
+        <div class="section"><h1 class="center-align">Enter your ride!</h1></div>
+        <div class="section">
+            <form method="POST" action="graph" enctype="multipart/form-data" class="left-align">
+                {% csrf_token %}
+                <div class="form-color">
+                  {{ rideForm }}
+                </div>
+                <div class="section"><input type="file" name="log_file" ccept=".csv"/></div>
+                <div class="section"><button class="btn teal-effect teal lighten-2" type="submit">Graph<i class="material-icons right">multiline_chart</i></button></div>
+                {% if not user.is_authenticated %}
+                <p> Your data will not be saved. Please log-in to save your ride. </p>
+                {% endif %}
+            </form>
+        </div>
+      </div>
+      <div class="row">
+        <h4> Data Accepted: </h4>
+        <p> Note: extraneous columns are allowed but will be parsed out </P>
+        <div class="disabled">
+          {% if accepted_data_set %}
+            <ul>
+            {% for item in accepted_data_set %}
+              <div class="col sm1"><li><p>{{ item }}</p></li></div>
+            {% endfor %}
+            </ul>
+          {% else %}
+            <p>Data cannot be displayed at this time.</p>
+          {% endif %}
+        </div>
+      </div>
+  </div>
 {% endblock content %}

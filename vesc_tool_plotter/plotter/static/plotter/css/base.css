@@ -1,0 +1,48 @@
+body {
+  color: rgba(255,255,255,0.87);
+  background-color: #212121;
+  margin:0;
+  padding:0;
+}
+
+h1{
+  margin: 2rem 0;
+}
+
+.blue-hover:hover{
+  color: #46dbac;
+}
+
+.row {
+  border-radius: 5px;
+  margin: 24px 0;
+  padding: 10px 24px;
+}
+
+.m-elevation{
+  background-color: rgba(44,44,44);
+}
+
+.high {
+  color: rgba(255,255,255,0.87);
+}
+
+.medium {
+  color: rgba(255,255,255,0.6);
+}
+
+.disabled{
+  color: rgba(255,255,255,0.38);
+}
+
+.form-color input{
+  color: rgba(255,255,255,0.87);
+}
+
+.form-color label{
+  color: rgba(255,255,255,0.60);
+}
+
+#id_description{
+  height: 92px;
+}

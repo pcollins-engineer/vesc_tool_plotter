@@ -1,5 +1,30 @@
 {% extends "../base.html" %}
 {% block title %}Profile{% endblock title %}
 {% block content %}
-  <h1> New Build </h1>
+  <div class="container">
+    <div class='row m-elevation z-depth-3'>
+      <div class="section"><h1 class="center-align">New build!</h1></div>
+      <div class="section">
+          <form method="POST" action="graph" enctype="multipart/form-data" class="left-align">
+              {% csrf_token %}
+              <div class="form-color">
+                <h4>Board:</h4>
+                {{ boardForm }}
+                <h4>Foil:</h4>
+                {{ foilForm }}
+                <h4>Motor:</h4>
+                {{ motorForm }}
+                <h4>Controller:</h4>
+                {{ controllerForm }}
+                <h4>Propellor:</h4>
+                {{ propellerForm }}
+              </div>
+              <div class="section"><button class="btn teal-effect teal lighten-2" type="submit">Save<i class="material-icons right">input</i></button></div>
+              {% if not user.is_authenticated %}
+              <p> Your data will not be saved. Please log-in to save your ride. </p>
+              {% endif %}
+          </form>
+      </div>
+    </div>
+  </div>
 {% endblock content %}

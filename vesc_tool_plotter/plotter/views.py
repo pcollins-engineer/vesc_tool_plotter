@@ -1,6 +1,7 @@
 import csv
-from django.shortcuts import render, HttpResponse
 import json
+from django.shortcuts import render, HttpResponse
+from .forms import FoilForm, BoardForm, MotorForm, PropellerForm, ControllerForm, RideForm, BuildForm
 
 ACCEPTED_DATA_SET = {
     "temp_motor",
@@ -17,7 +18,8 @@ ACCEPTED_DATA_SET = {
 }
 
 def upload(request):
-    return render(request, "plotter/upload.html", context={'accepted_data_set':ACCEPTED_DATA_SET})
+    rideForm = RideForm()
+    return render(request, "plotter/upload.html", context={'accepted_data_set':ACCEPTED_DATA_SET, 'rideForm': rideForm })
 
 def graph(request):
     template_data = {}
@@ -61,4 +63,9 @@ def profile(request):
     return render(request, "plotter/profile.html", {})
 
 def add_build(request):
-    return render(request, "plotter/add_build.html", {})
+    boardForm = BoardForm()
+    foilForm = FoilForm()
+    motorForm = MotorForm()
+    propellerForm = PropellerForm()
+    controllerForm = ControllerForm()
+    return render(request, "plotter/add_build.html", context={'boardForm':boardForm, 'foilForm':foilForm, 'motorForm':motorForm, 'propellerForm':propellerForm, 'controllerForm':controllerForm})

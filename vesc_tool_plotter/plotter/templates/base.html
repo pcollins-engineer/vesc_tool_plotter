@@ -20,26 +20,27 @@
         {% endblock head_meta %}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="../static/plotter/css/base.css">
         {% block head_css %}
         {% endblock head_css %}
     </head>
-    <body>
+    <body class="grey darken-4">
       <header>
         <div class="navbar-fixed">
           <nav>
-            <div class="nav-wrapper grey darken-3">
+            <div class="nav-wrapper m-elevation">
               <ul class="left hide-on-med-and-down">
                 <li><a href="#"><i class="large material-icons">toys</i></a></li>
               </ul>
               <a href="#" data-target="mobile" class="sidenav-trigger"><i class="material-icons">menu</i> * Does not work *</a>
               <ul class="right hide-on-med-and-down">
-                <li><a href="/upload">upload</a></li>
+                <li><a href="/build"><i class="large material-icons blue-hover right">build</i></a></li>
+                <li><a href="/upload"><i class="large material-icons blue-hover right">motorcycle</i></a></li>
                 {% if user.is_authenticated %}
-                    <li><a href="/profile"><i class="large material-icons right">account_box</i>account</a></li>
-                    <li><a href="/logout" class="wave-effect wave btn">logout</a></li>
+                    <li><a href="/profile"><i class="large material-icons blue-hover right">account_circle</i></a></li>
                 {% else %}
-                    <li><a href="/login" class="wave-effect wave btn m-r-none">login</a></li>
-                    <li><a href="/register" class="wave-effect wave btn">sign Up</a></li>
+                    <li><a href="/login" class="teal-effect teal lighten-2 btn m-r-none">login</a></li>
+                    <li><a href="/register" class="teal-effect teal lighten-2 btn">sign Up</a></li>
                 {% endif %}
               </ul>
             </div>
@@ -49,10 +50,10 @@
           <li><a href="/upload">upload</a></li>
           {% if user.is_authenticated %}
               <li><a href="/profile"><i class="large material-icons right">account_box</i>account</a></li>
-              <li><a href="/logout" class="wave-effect wave btn">logout</a></li>
+              <li><a href="/logout" class="teal-effect teal lighten-2 btn">logout</a></li>
           {% else %}
-              <li><a href="/login" class="wave-effect wave btn m-r-none">login</a></li>
-              <li><a href="/register" class="wave-effect wave btn">sign Up</a></li>
+              <li><a href="/login" class="teal-effect teal lighten-2 btn m-r-none">login</a></li>
+              <li><a href="/register" class="teal-effect teal lighten-2 btn">sign Up</a></li>
           {% endif %}
         </ul>
       </header>
