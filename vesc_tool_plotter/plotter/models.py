@@ -82,3 +82,17 @@ class Ride(models.Model):
 
     class Meta:
         db_table = 'rides'
+
+class CsvRow(models.Model):
+    ms_time = models.IntegerField()
+    temp_motor = models.DecimalField(max_digits=10, decimal_places=4, null=True)
+    current_motor = models.DecimalField(max_digits=10, decimal_places=4, null=True)
+    current_in = models.DecimalField(max_digits=10, decimal_places=4, null=True)
+    d_axis_current = models.DecimalField(max_digits=10, decimal_places=4, null=True)
+    q_axis_current = models.DecimalField(max_digits=10, decimal_places=4, null=True)
+    erpm = models.DecimalField(max_digits=10, decimal_places=4, null=True)
+    duty_cycle = models.DecimalField(max_digits=10, decimal_places=4, null=True)
+    amp_hours_used = models.DecimalField(max_digits=10, decimal_places=4, null=True)
+    amp_hours_charged = models.DecimalField(max_digits=10, decimal_places=4, null=True)
+    watt_hours_used = models.DecimalField(max_digits=10, decimal_places=4, null=True)
+    watt_hours_charged = models.DecimalField(max_digits=10, decimal_places=4, null=True)

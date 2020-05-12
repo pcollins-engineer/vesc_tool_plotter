@@ -47,14 +47,8 @@ def graph(request):
             rowData = []
             for key in dataMap:
                 rowData.append(row[key])
-            print(rowData)
             data.append(rowData)
 
-        # ************** original parsing code
-        # header = next(reader)
-        # data = []
-        # for row in reader:
-        #     data.append(rowData)
         template_data = {
             "header": header,
             "data": data

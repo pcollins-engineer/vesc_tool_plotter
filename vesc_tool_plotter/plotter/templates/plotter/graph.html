@@ -5,24 +5,9 @@
 {% endblock head_css %}
 {% block content %}
   <div class="wrapper">
-      <div id="selectContainer">
-          <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="current">
-              <label class="form-check-label" for="1">current</label>
-          </div>
-          <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="rpm">
-              <label class="form-check-label" for="2">rpm</label>
-          </div>
-          <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="duty">
-              <label class="form-check-label" for="3">duty</label>
-          </div>
-          <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="voltage">
-              <label class="form-check-label" for="4">voltage</label>
-          </div>
+      <div id="selectContainer" class="container">
           <div><button type="submit" id="generateButton">Generate</button></div>
+          <div><button type="submit" id="selectAll">Select All</button></div>
       </div>
       <div id="chartContainer" style="height: 300px; width: 100%;"></div>
   </div>
@@ -65,6 +50,20 @@
               return "";
             }
         })
+      addCheckbox(header[i])
+    }
+
+    function addCheckbox(name) {
+       var container = $('#selectContainer');
+       var inputs = container.find('input');
+       var id = inputs.length+1;
+
+       var div = $('<div />', { class: 'col s3'})
+       var label = $('<label />')
+       $('<input />', { type: 'checkbox', id: 'cb'+id, value: name, class:'checkboxes'}).appendTo(label)
+       $('<span />', { text: name }).appendTo(label)
+       label.appendTo(div)
+       div.appendTo(container)
     }
 
     // newData[k-1] matches k key:value pair of data[j]
@@ -108,11 +107,13 @@
 
         // check if selected has values - initially empty
         if (selected.length > 0){
-            for (var i in dataIncluded){
-                if (!selected.includes(dataIncluded[i])){ //if checked in checkbox
-                    chart.options.data[i].visible = false;
+            for (var i=1;i<header.length;i++){
+                if (!selected.includes(header[i])){ //if checked in checkbox
+                    chart.options.data[i-1].visible = false;
+                    chart.options.data[i-1].toolTipContent = null;
                 } else {
-                    chart.options.data[i].visible = true;
+                    chart.options.data[i-1].visible = true;
+                    chart.options.data[i-1].toolTipContent = "<span style='\"'color: {color};'\"'>{name}</span>: <strong>{y}</strong>";;
                 }
             }
         }
@@ -122,7 +123,7 @@
      // Determines which data has been selected for viewing -> () => array
      function displayData() {
         var selectedData = [];
-        $(".form-check-input").each(function() {
+        $(".checkboxes").each(function() {
             if($(this).is(":checked")){
                 selectedData.push($(this).val())
             }
@@ -134,6 +135,13 @@
         var selected = displayData()
         console.log(selected);
         generateChart(selected);
+    })
+
+    // Runs when the select all button is clicked.  Checks all buttons
+    $("#selectAll").click(function() {
+        $(".checkboxes").each(function() {
+            $(this).prop('checked', true)
+        })
     })
 
   })
