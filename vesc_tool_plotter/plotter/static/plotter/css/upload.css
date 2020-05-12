@@ -1,0 +1,52 @@
+.ride{
+  padding: 0 24px;
+}
+
+.container {
+  display:flex;
+  flex-flow:column;
+  margin-bottom: 50px;
+}
+
+.flex-row {
+  flex: 1;
+  display: flex;
+  flex-flow:column;
+}
+
+.flex-row-top{
+  flex: 1;
+  border-radius:5px;
+  margin:24px 0;
+}
+
+.header{
+  padding: 10px 48px;
+}
+
+.flex-col-left{
+  flex: 4 1 0;
+  padding:24px;
+  margin-right:24px;
+  border: 1px solid #009688;
+}
+
+.flex-col-right{
+  flex: 8 1 0;
+  border-radius: 5px;
+}
+
+.disabled ul {
+  list-style-type: circle;
+  margin-left:10px;
+}
+
+.flex-col-right .section h2 {
+  margin: 0.5em;
+}
+
+@media only screen and (min-width: 992px){
+  .flex-row{
+    flex-flow: row;
+  }
+}

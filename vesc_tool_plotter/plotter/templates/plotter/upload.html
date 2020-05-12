@@ -1,11 +1,38 @@
 {% extends "../base.html" %}
 {% block title %}Upload{% endblock title %}
+{% block head_css %}
+  <link rel="stylesheet" href="../../static/plotter/css/upload.css">
+{% endblock head_css %}
 {% block content %}
   <div class="container">
-      <div class='row m-elevation z-depth-3'>
-        <div class="section"><h1 class="center-align">Enter your ride!</h1></div>
+    <div class="section"><h2 class="center-align">Add a ride!</h2></div>
+    <div class="divider teal ligten-2"></div>
+    <div class="flex-row-top m-elevation z-depth-3">
+      <div class="header">
+        <p class="center-align"> When you upload a ride to e-Monitor, your ride data will be saved to our database. Upon logging-in you can view all rides and their corresponding builds in the "account" tab found in the upper-right corner. If you're not logged your data will not be saved, however you can vizualize your data upon hitting graph.</p>
+      </div>
+    </div>
+    <div class="flex-row">
+      <div class="flex-col-left">
+        <h4 class="center-align">Data Accepted</h4>
+        <div class="divider teal ligten-2"></div>
+          <div class="disabled">
+            <p> Note: extraneous columns are allowed but will be parsed out </P>
+            {% if accepted_data_set %}
+              <ul>
+              {% for item in accepted_data_set %}
+                <div><li><p>{{ item }}</p></li></div>
+              {% endfor %}
+              </ul>
+            {% else %}
+              <p>Data cannot be displayed at this time.</p>
+            {% endif %}
+          </div>
+      </div>
+      <div class='flex-col-right l8 m-elevation z-depth-3'>
+        <div class="section"><h2 class="center-align">Enter Ride Info</h2></div>
         <div class="section">
-            <form method="POST" action="graph" enctype="multipart/form-data" class="left-align">
+            <form method="POST" action="graph" enctype="multipart/form-data" class="ride left-align" novalidate>
                 {% csrf_token %}
                 <div class="form-color">
                   {{ rideForm }}
@@ -18,20 +45,6 @@
             </form>
         </div>
       </div>
-      <div class="row">
-        <h4> Data Accepted: </h4>
-        <p> Note: extraneous columns are allowed but will be parsed out </P>
-        <div class="disabled">
-          {% if accepted_data_set %}
-            <ul>
-            {% for item in accepted_data_set %}
-              <div class="col sm1"><li><p>{{ item }}</p></li></div>
-            {% endfor %}
-            </ul>
-          {% else %}
-            <p>Data cannot be displayed at this time.</p>
-          {% endif %}
-        </div>
-      </div>
+    </div>
   </div>
 {% endblock content %}
