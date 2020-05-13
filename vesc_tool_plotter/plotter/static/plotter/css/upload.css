@@ -1,17 +1,13 @@
 .ride{
-  padding: 0 24px;
-}
-
-.container {
-  display:flex;
-  flex-flow:column;
-  margin-bottom: 50px;
+  padding: 0 48px;
 }
 
 .flex-row {
   flex: 1;
   display: flex;
   flex-flow:column;
+  justify-content:center;
+  align-content:center;
 }
 
 .flex-row-top{
@@ -29,11 +25,15 @@
   padding:24px;
   margin-right:24px;
   border: 1px solid #009688;
+  justify-content:center;
+  align-content:center;
 }
 
 .flex-col-right{
   flex: 8 1 0;
   border-radius: 5px;
+  justify-content:center;
+  align-content:center;
 }
 
 .disabled ul {
@@ -46,14 +46,20 @@
 }
 
 #ride-form label {
-  color: rgba(255,255,255,0.60);
+  color: rgba(255,255,255,0.87);
 }
 
 #ride-form input {
   color: rgba(255,255,255,0.87);
 }
 
+textarea {
+  height:92px !important;
+}
 
+.modal {
+  color: black;
+}
 @media only screen and (min-width: 992px){
   .flex-row{
     flex-flow: row;

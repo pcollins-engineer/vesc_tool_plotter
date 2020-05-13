@@ -81,9 +81,10 @@ def profile(request):
     return render(request, "plotter/profile.html", {})
 
 def add_build(request):
+    buildForm = BuildForm()
     boardForm = BoardForm()
     foilForm = FoilForm()
     motorForm = MotorForm()
     propellerForm = PropellerForm()
     controllerForm = ControllerForm()
-    return render(request, "plotter/add_build.html", context={'boardForm':boardForm, 'foilForm':foilForm, 'motorForm':motorForm, 'propellerForm':propellerForm, 'controllerForm':controllerForm})
+    return render(request, "plotter/add_build.html", context={'boardForm':boardForm, 'foilForm':foilForm, 'motorForm':motorForm, 'propellerForm':propellerForm, 'controllerForm':controllerForm, 'buildForm':buildForm})

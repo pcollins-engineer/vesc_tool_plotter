@@ -9,12 +9,24 @@ h1{
   margin: 2rem 0;
 }
 
+body .container {
+  display:flex;
+  flex-flow:column;
+  margin-bottom: 50px;
+  justify-content: center;
+  align-content: center;
+}
+
 .blue-hover:hover{
   color: #46dbac;
 }
 
 .row{
   border-radius: 5px;
+}
+
+.l-elevation{
+  background-color: #272727;
 }
 
 .m-elevation{

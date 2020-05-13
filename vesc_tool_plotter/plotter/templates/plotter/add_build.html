@@ -1,23 +1,117 @@
 {% extends "../base.html" %}
 {% block title %}Profile{% endblock title %}
+{% block head_css %}
+  <link rel="stylesheet" href="../../static/plotter/css/build.css"/>
+{% endblock head_css %}
 {% block content %}
   <div class="container">
-    <div class='row m-elevation z-depth-3'>
-      <div class="section"><h1 class="center-align">New build!</h1></div>
+    <div class="section"><h2 class="center-align">Add a Build!</h2></div>
+    <div class="divider teal ligten-2"></div>
+    <div class='flex-col m-elevation z-depth-3'>
+      <h4 class="center-align">Enter Build Info</h4>
       <div class="section">
-          <form method="POST" action="graph" enctype="multipart/form-data" class="left-align">
+          <form method="POST" action="" class="build-form left-align">
               {% csrf_token %}
               <div class="form-color">
-                <h4>Board:</h4>
-                {{ boardForm }}
-                <h4>Foil:</h4>
-                {{ foilForm }}
-                <h4>Motor:</h4>
-                {{ motorForm }}
-                <h4>Controller:</h4>
-                {{ controllerForm }}
-                <h4>Propellor:</h4>
-                {{ propellerForm }}
+                  {{ crsf_token }}
+                  {{ buildForm }}
+                <ul class="collapsible">
+                  <li>
+                    <div class="collapsible-header">
+                      Board
+                      <i class="material-icons">add</i>
+                    </div>
+                    <div class="collapsible-body">
+                      {{ crsf_token }}
+                      {{ boardForm }}
+                      <div class="input-field">
+                        <select>
+                          <option value="" disabled selected>Previous Board</option>
+                          <option value="1">Option 1</option>
+                          <option value="2">Option 2</option>
+                          <option value="3">Option 3</option>
+                        </select>
+                        <label>Previous Board</label>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="collapsible-header">
+                      Foil
+                      <i class="material-icons">add</i>
+                    </div>
+                    <div class="collapsible-body">
+                      {{ crsf_token }}
+                      {{ foilForm }}
+                      <div class="input-field">
+                        <select>
+                          <option value="" disabled selected>Previous Foil</option>
+                          <option value="1">Option 1</option>
+                          <option value="2">Option 2</option>
+                          <option value="3">Option 3</option>
+                        </select>
+                        <label>Previous Foil</label>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="collapsible-header">
+                      Motor
+                      <i class="material-icons">add</i>
+                    </div>
+                    <div class="collapsible-body">
+                      {{ crsf_token }}
+                      {{ motorForm }}
+                      <div class="input-field">
+                        <select>
+                          <option value="" disabled selected>Previous Motor</option>
+                          <option value="1">Option 1</option>
+                          <option value="2">Option 2</option>
+                          <option value="3">Option 3</option>
+                        </select>
+                        <label>Previous Motor</label>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="collapsible-header">
+                      Controller
+                      <i class="material-icons">add</i>
+                    </div>
+                    <div class="collapsible-body">
+                      {{ crsf_token }}
+                      {{ controllerForm }}
+                      <div class="input-field">
+                        <select>
+                          <option value="" disabled selected>Previous Controller</option>
+                          <option value="1">Option 1</option>
+                          <option value="2">Option 2</option>
+                          <option value="3">Option 3</option>
+                        </select>
+                        <label>Previous Controller</label>
+                      </div>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="collapsible-header">
+                      Propeller
+                      <i class="material-icons">add</i>
+                    </div>
+                    <div class="collapsible-body">
+                      {{ crsf_token }}
+                      {{ propellerForm }}
+                      <div class="input-field">
+                        <select>
+                          <option value="" disabled selected>Previous Propeller</option>
+                          <option value="1">Option 1</option>
+                          <option value="2">Option 2</option>
+                          <option value="3">Option 3</option>
+                        </select>
+                        <label>Previous Propeller</label>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
               </div>
               <div class="section"><button class="btn teal-effect teal lighten-2" type="submit">Save<i class="material-icons right">input</i></button></div>
               {% if not user.is_authenticated %}
@@ -31,8 +125,14 @@
 {% block footer_scripts %}
   <script type="text/javascript" src='../../static/plotter/js/base.js'></script>
   <script>
-    $(document).ready(function() {
-      addInputClasses();
-    })
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.collapsible');
+      var instances = M.Collapsible.init(elems, {});
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('select');
+      var instances = M.FormSelect.init(elems, {});
+    });
+    addInputClasses();
   </script>
 {% endblock footer_scripts %}

@@ -53,8 +53,8 @@ class Controller(models.Model):
         db_table = 'controllers'
 
 class Build(models.Model):
-    title = models.CharField('foil title', max_length=50)
-    description = models.TextField('foil description', null=True, max_length=200)
+    title = models.CharField('build title', max_length=50)
+    description = models.TextField('build description', null=True, max_length=200)
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='build')
     foil = models.ForeignKey(Foil, on_delete=models.CASCADE, null=True, related_name='build')
     board = models.ForeignKey(Board, on_delete=models.CASCADE, null=True, related_name='build')

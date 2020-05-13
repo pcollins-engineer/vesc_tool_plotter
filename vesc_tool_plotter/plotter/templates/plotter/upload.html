@@ -29,8 +29,8 @@
             {% endif %}
           </div>
       </div>
-      <div class='flex-col-right l8 m-elevation z-depth-3'>
-        <div class="section"><h2 class="center-align">Enter Ride Info</h2></div>
+      <div class='flex-col-right m-elevation z-depth-3'>
+        <div class="section"><h4 class="center-align">Enter Ride Info</h4></div>
         <div class="section">
             <form method="POST" action="" enctype="multipart/form-data" class="ride left-align" novalidate>
                 {% csrf_token %}
@@ -54,9 +54,11 @@
 {% block footer_scripts %}
   <script type="text/javascript" src='../../static/plotter/js/base.js'></script>
   <script>
-    $(document).ready(function() {
-      addInputClasses();
-      $('#id_ride_date').prop('type', 'date');
-    })
+    addInputClasses();
+    $('#id_ride_date').prop('class', 'datepicker');
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.datepicker');
+      var instances = M.Datepicker.init(elems, {});
+    });
   </script>
 {% endblock footer_scripts %}
