@@ -30,7 +30,7 @@ class ControllerForm(ModelForm):
 class RideForm(ModelForm):
     class Meta:
         model = models.Ride
-        fields = ['title', 'description', 'ride_date', 'location']
+        fields = ['title', 'description', 'ride_date', 'location', 'file']
 
 class BuildForm(ModelForm):
     class Meta:

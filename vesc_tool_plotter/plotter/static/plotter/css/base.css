@@ -18,7 +18,6 @@ h1{
 }
 
 .m-elevation{
-  border-radius: 5px;
   background-color: rgba(44,44,44);
 }
 
@@ -34,14 +33,10 @@ h1{
   color: rgba(255,255,255,0.38);
 }
 
-.form-color input{
+#id_description{
   color: rgba(255,255,255,0.87);
 }
 
-.form-color label{
-  color: rgba(255,255,255,0.60);
-}
-
-#id_description{
-  height: 92px;
+.errorlist{
+  color: #ef5350;
 }

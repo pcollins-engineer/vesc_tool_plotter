@@ -28,3 +28,11 @@
     </div>
   </div>
 {% endblock content %}
+{% block footer_scripts %}
+  <script type="text/javascript" src='../../static/plotter/js/base.js'></script>
+  <script>
+    $(document).ready(function() {
+      addInputClasses();
+    })
+  </script>
+{% endblock footer_scripts %}

@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Foil(models.Model):
     title = models.CharField('foil title', max_length=50)
-    description = models.CharField('foil description', null=True, max_length=200)
+    description = models.TextField('foil description', null=True, max_length=200)
 
     def __str__(self):
         return self.title
@@ -14,7 +14,7 @@ class Foil(models.Model):
 
 class Board(models.Model):
     title = models.CharField('board title', max_length=50)
-    description = models.CharField('board description', null=True, max_length=200)
+    description = models.TextField('board description', null=True, max_length=200)
 
     def __str__(self):
         return self.title
@@ -24,7 +24,7 @@ class Board(models.Model):
 
 class Motor(models.Model):
     title = models.CharField('motor title', max_length=50)
-    description = models.CharField('motor description', null=True, max_length=200)
+    description = models.TextField('motor description', null=True, max_length=200)
 
     def __str__(self):
         return self.title
@@ -34,7 +34,7 @@ class Motor(models.Model):
 
 class Propeller(models.Model):
     title = models.CharField('propeller title', max_length=50)
-    description = models.CharField('propeller description', null=True, max_length=200)
+    description = models.TextField('propeller description', null=True, max_length=200)
 
     def __str__(self):
         return self.title
@@ -44,7 +44,7 @@ class Propeller(models.Model):
 
 class Controller(models.Model):
     title = models.CharField('controller title', max_length=50)
-    description = models.CharField('controller description', null=True, max_length=200)
+    description = models.TextField('controller description', null=True, max_length=200)
 
     def __str__(self):
         return self.title
@@ -54,7 +54,7 @@ class Controller(models.Model):
 
 class Build(models.Model):
     title = models.CharField('foil title', max_length=50)
-    description = models.CharField('foil description', null=True, max_length=200)
+    description = models.TextField('foil description', null=True, max_length=200)
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='build')
     foil = models.ForeignKey(Foil, on_delete=models.CASCADE, null=True, related_name='build')
     board = models.ForeignKey(Board, on_delete=models.CASCADE, null=True, related_name='build')
@@ -72,17 +72,20 @@ class Build(models.Model):
 class Ride(models.Model):
     rider = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='ride')
     title = models.CharField('ride title', max_length=50)
-    description = models.CharField('ride description', null=True, max_length=200)
+    description = models.TextField('ride description', null=True, max_length=200)
     ride_date = models.DateField('date of ride')
     location = models.CharField('location', null=True, max_length=50)
     build = models.ForeignKey(Build, models.SET_NULL, null=True, related_name='ride')
     pub_date = models.DateField('date uploaded', False, True) # Automatically sets
+    file = models.FileField(null=True);
+    name = models.CharField('file name',null=True, max_length=50)
 
     def __str__(self):
         return self.title
 
     class Meta:
         db_table = 'rides'
+
 
 class CsvRow(models.Model):
     ride = models.ForeignKey(Ride, on_delete=models.CASCADE, related_name='row')
@@ -98,3 +101,6 @@ class CsvRow(models.Model):
     amp_hours_charged = models.DecimalField(max_digits=10, decimal_places=4, null=True)
     watt_hours_used = models.DecimalField(max_digits=10, decimal_places=4, null=True)
     watt_hours_charged = models.DecimalField(max_digits=10, decimal_places=4, null=True)
+
+    def create_row(self):
+        print('row created')

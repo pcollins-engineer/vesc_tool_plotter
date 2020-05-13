@@ -45,6 +45,15 @@
   margin: 0.5em;
 }
 
+#ride-form label {
+  color: rgba(255,255,255,0.60);
+}
+
+#ride-form input {
+  color: rgba(255,255,255,0.87);
+}
+
+
 @media only screen and (min-width: 992px){
   .flex-row{
     flex-flow: row;
