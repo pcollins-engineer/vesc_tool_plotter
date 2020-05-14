@@ -36,8 +36,8 @@ class BuildForm(ModelForm):
     class Meta:
         model = models.Build
         fields = ['title', 'description']
-        # widgets = {
-        #     'title': forms.TextInput(attrs={'placeholder': 'e-Foil 1.0'}),
-        #     'description': forms.Textarea(
-        #         attrs={'placeholder': 'Enter description here'}),
-        # }
+        widgets = {
+            'title': forms.TextInput(attrs={'placeholder': 'e-Foil 1.0'}),
+            'description': forms.Textarea(
+                attrs={'placeholder': 'Enter description here'}),
+        }

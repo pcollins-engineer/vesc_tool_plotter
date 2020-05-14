@@ -17,6 +17,10 @@ textarea {
   /* color: #46dbac; */
 }
 
+.build-form input{
+  color: rgba(255,255,255,0.87);
+}
+
 .collapsible {
   border:none;
   box-shadow:none;
@@ -25,8 +29,8 @@ textarea {
 .collapsible .collapsible-header{
   background-color: transparent;
   justify-content: space-between;
-  border-bottom: 1px solid #46dbac;
-  color: #46dbac;
+  border-bottom: 1px solid #009688;
+  color: #009688;
 }
 
 .collapsible .collapsible-header:hover{

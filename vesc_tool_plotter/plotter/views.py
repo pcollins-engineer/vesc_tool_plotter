@@ -2,7 +2,7 @@ import csv
 import json
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
-from .models import CsvRow
+from .models import CsvRow, Build, Ride
 from .forms import FoilForm, BoardForm, MotorForm, PropellerForm, ControllerForm, RideForm, BuildForm
 
 ACCEPTED_DATA_SET = {
@@ -77,38 +77,41 @@ def graph(request):
     send_data = parse_file(request)
     return render(request, "plotter/graph.html", context={"mydata": send_data})
 
-def profile(request):
-    return render(request, "plotter/profile.html", {})
+def profile(request, username):
+    builds = Build.objects.filter(author=request.user)
+    return render(request, "plotter/profile.html", context={"username": username, "builds":builds})
 
 def add_build(request):
     if not request.user.is_authenticated:
         messages.warning(request, 'You need to be logged in to create a build')
         return redirect('accounts:login')
 
-    buildForm = BuildForm()
-    boardForm = BoardForm()
-    foilForm = FoilForm()
-    motorForm = MotorForm()
-    propellerForm = PropellerForm()
-    controllerForm = ControllerForm()
+    buildForm = BuildForm(prefix='build')
+    boardForm = BoardForm(prefix='board')
+    foilForm = FoilForm(prefix='foil')
+    motorForm = MotorForm(prefix='motor')
+    propellerForm = PropellerForm(prefix='propeller')
+    controllerForm = ControllerForm(prefix='controller')
 
     if request.user.is_authenticated:
         if request.method == 'POST':
-            buildForm = BuildForm(request.POST)
-            boardForm = BoardForm(request.POST)
-            foilForm = FoilForm(request.POST)
-            motorForm = MotorForm(request.POST)
-            propellerForm = PropellerForm(request.POST)
-            controllerForm = ControllerForm(request.POST)
+            buildForm = BuildForm(request.POST, prefix='build')
+            boardForm = BoardForm(request.POST, prefix='board')
+            foilForm = FoilForm(request.POST, prefix='foil')
+            motorForm = MotorForm(request.POST, prefix='motor')
+            propellerForm = PropellerForm(request.POST, prefix='propeller')
+            controllerForm = ControllerForm(request.POST, prefix='controller')
             if buildForm.is_valid() and boardForm.is_valid() and foilForm.is_valid() and motorForm.is_valid() and propellerForm.is_valid() and controllerForm.is_valid():
                 #get form object but dont save
                 build = buildForm.save(commit=False)
+                print(build)
                 board = boardForm.save()
                 foil = foilForm.save()
                 motor = motorForm.save()
                 prop = propellerForm.save()
                 controller = controllerForm.save()
                 # setting foreign keys
+                build.author = request.user
                 build.board = board
                 build.foil = foil
                 build.motor = motor
@@ -117,6 +120,6 @@ def add_build(request):
                 build.save()
                 title = buildForm.cleaned_data.get('title')
                 messages.success(request, 'Build "' + title + '" was created')
-                return redirect('')
+                return redirect('/build')
 
     return render(request, "plotter/add_build.html", context={'boardForm':boardForm, 'foilForm':foilForm, 'motorForm':motorForm, 'propellerForm':propellerForm, 'controllerForm':controllerForm, 'buildForm':buildForm})

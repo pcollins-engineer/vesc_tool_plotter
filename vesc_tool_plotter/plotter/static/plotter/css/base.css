@@ -17,6 +17,10 @@ body .container {
   align-content: center;
 }
 
+textarea{
+  color: rgba(255,255,255,0.87);
+}
+
 .blue-hover:hover{
   color: #46dbac;
 }
@@ -43,10 +47,6 @@ body .container {
 
 .disabled{
   color: rgba(255,255,255,0.38);
-}
-
-#id_description{
-  color: rgba(255,255,255,0.87);
 }
 
 .errorlist{

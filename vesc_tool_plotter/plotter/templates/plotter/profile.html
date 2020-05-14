@@ -1,6 +1,32 @@
-{% extends "../base.html" %}
+{% extends "./base.html" %}
 {% block title %}Profile{% endblock title %}
+{% block head_css %}
+  <link rel="stylesheet" href="../../static/plotter/css/base.css">
+{% endblock head_css %}
 {% block content %}
-  <h1> Profile </h1>
+  <h1> {{ username }} profile </h1>
   <li><a href="/logout" class="teal-effect teal lighten-2 btn">logout</a></li>
+  {% for build in builds %}
+    <h4>{{ build.title }}</h4>
+    <div class="section">
+      <h6>{{build.board.title}}</h6>
+      <p>{{build.bmotoroard.description}}</p>
+    </div>
+    <div class="section">
+      <h6>{{build.foil.title}}</h6>
+      <p>{{build.foil.description}}</p>
+    </div>
+    <div class="section">
+      <h6>{{build.motor.title}}</h6>
+      <p>{{build.motor.description}}</p>
+    </div>
+    <div class="section">
+      <h6>{{build.controller.title}}</h6>
+      <p>{{build.controller.description}}</p>
+    </div>
+    <div class="section">
+      <h6>{{build.propeller.title}}</h6>
+      <p>{{build.propeller.description}}</p>
+    </div>
+  {% endfor %}
 {% endblock content %}
