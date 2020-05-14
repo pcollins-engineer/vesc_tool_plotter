@@ -67,11 +67,11 @@
 		}
 
 		#messages{
-			background-color: grey;
 			color: white;
 			padding: 10px;
 			margin-top: 10px;
 		}
+
 	</style>
 
 </head>
@@ -79,6 +79,9 @@
 	<div class="container h-100">
 		<div class="d-flex justify-content-center h-100">
 			<div class="user_card">
+				{% for message in messages %}
+					<p id="messages">{{message}}</p>
+				{% endfor %}
 				<div class="d-flex justify-content-center">
 
 
@@ -106,10 +109,6 @@
 					</form>
 
 				</div>
-
-				{% for message in messages %}
-					<p id="messages">{{message}}</p>
-				{% endfor %}
 
 				<div class="mt-4">
 					<div class="d-flex justify-content-center links" style="color:white">

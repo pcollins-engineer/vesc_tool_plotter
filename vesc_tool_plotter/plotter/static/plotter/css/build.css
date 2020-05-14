@@ -11,6 +11,12 @@ textarea {
   width: 70%;
 }
 
+.build-form label{
+  color: rgba(255,255,255,0.87);
+  font-size: 1em;
+  /* color: #46dbac; */
+}
+
 .collapsible {
   border:none;
   box-shadow:none;
@@ -19,6 +25,8 @@ textarea {
 .collapsible .collapsible-header{
   background-color: transparent;
   justify-content: space-between;
+  border-bottom: 1px solid #46dbac;
+  color: #46dbac;
 }
 
 .collapsible .collapsible-header:hover{
@@ -27,7 +35,7 @@ textarea {
 .collapsible .collapsible-body{
   background-color: transparent;
   color: rgba(255,255,255,0.87);
-  padding: 2rem 0;
+  padding: 2rem 24px;
 }
 
 .collapsible .collapsible-body input{
@@ -36,6 +44,7 @@ textarea {
 
 .collapsible .collapsible-body label{
   color: rgba(255,255,255,0.87);
+  /* color: #46dbac; */
 }
 
 .dropdown-content {

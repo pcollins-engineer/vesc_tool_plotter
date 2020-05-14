@@ -6,14 +6,16 @@
 {% block content %}
   <div class="container">
     <div class="section"><h2 class="center-align">Add a Build!</h2></div>
-    <div class="divider teal ligten-2"></div>
+    <div class="divider teal lighten-2"></div>
     <div class='flex-col m-elevation z-depth-3'>
-      <h4 class="center-align">Enter Build Info</h4>
+      <!-- <h4 class="center-align">Enter Build</h4> -->
       <div class="section">
-          <form method="POST" action="" class="build-form left-align">
+          <form method="POST" action="" class="build-form left-align" novalidate>
               {% csrf_token %}
-              <div class="form-color">
-                  {{ crsf_token }}
+              {% for message in messages %}
+                <h4 id="messages" class="center-align teal-text text-lighten-2">{{message}}</h4>
+              {% endfor %}
+              <div class="build-form">
                   {{ buildForm }}
                 <ul class="collapsible">
                   <li>
@@ -22,9 +24,9 @@
                       <i class="material-icons">add</i>
                     </div>
                     <div class="collapsible-body">
-                      {{ crsf_token }}
+                      {% csrf_token %}
                       {{ boardForm }}
-                      <div class="input-field">
+                      <!-- <div class="input-field">
                         <select>
                           <option value="" disabled selected>Previous Board</option>
                           <option value="1">Option 1</option>
@@ -32,7 +34,7 @@
                           <option value="3">Option 3</option>
                         </select>
                         <label>Previous Board</label>
-                      </div>
+                      </div> -->
                     </div>
                   </li>
                   <li>
@@ -41,9 +43,9 @@
                       <i class="material-icons">add</i>
                     </div>
                     <div class="collapsible-body">
-                      {{ crsf_token }}
+                      {% csrf_token %}
                       {{ foilForm }}
-                      <div class="input-field">
+                      <!-- <div class="input-field">
                         <select>
                           <option value="" disabled selected>Previous Foil</option>
                           <option value="1">Option 1</option>
@@ -51,7 +53,7 @@
                           <option value="3">Option 3</option>
                         </select>
                         <label>Previous Foil</label>
-                      </div>
+                      </div> -->
                     </div>
                   </li>
                   <li>
@@ -60,9 +62,9 @@
                       <i class="material-icons">add</i>
                     </div>
                     <div class="collapsible-body">
-                      {{ crsf_token }}
+                      {% csrf_token %}
                       {{ motorForm }}
-                      <div class="input-field">
+                      <!-- <div class="input-field">
                         <select>
                           <option value="" disabled selected>Previous Motor</option>
                           <option value="1">Option 1</option>
@@ -70,7 +72,7 @@
                           <option value="3">Option 3</option>
                         </select>
                         <label>Previous Motor</label>
-                      </div>
+                      </div> -->
                     </div>
                   </li>
                   <li>
@@ -79,9 +81,9 @@
                       <i class="material-icons">add</i>
                     </div>
                     <div class="collapsible-body">
-                      {{ crsf_token }}
+                      {% csrf_token %}
                       {{ controllerForm }}
-                      <div class="input-field">
+                      <!-- <div class="input-field">
                         <select>
                           <option value="" disabled selected>Previous Controller</option>
                           <option value="1">Option 1</option>
@@ -89,7 +91,7 @@
                           <option value="3">Option 3</option>
                         </select>
                         <label>Previous Controller</label>
-                      </div>
+                      </div> -->
                     </div>
                   </li>
                   <li>
@@ -98,9 +100,9 @@
                       <i class="material-icons">add</i>
                     </div>
                     <div class="collapsible-body">
-                      {{ crsf_token }}
+                      {% csrf_token %}
                       {{ propellerForm }}
-                      <div class="input-field">
+                      <!-- <div class="input-field">
                         <select>
                           <option value="" disabled selected>Previous Propeller</option>
                           <option value="1">Option 1</option>
@@ -108,7 +110,7 @@
                           <option value="3">Option 3</option>
                         </select>
                         <label>Previous Propeller</label>
-                      </div>
+                      </div> -->
                     </div>
                   </li>
                 </ul>

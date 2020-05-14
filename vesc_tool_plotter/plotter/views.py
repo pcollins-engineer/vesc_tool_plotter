@@ -1,6 +1,6 @@
 import csv
 import json
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages
 from .models import CsvRow
 from .forms import FoilForm, BoardForm, MotorForm, PropellerForm, ControllerForm, RideForm, BuildForm
@@ -81,10 +81,42 @@ def profile(request):
     return render(request, "plotter/profile.html", {})
 
 def add_build(request):
+    if not request.user.is_authenticated:
+        messages.warning(request, 'You need to be logged in to create a build')
+        return redirect('accounts:login')
+
     buildForm = BuildForm()
     boardForm = BoardForm()
     foilForm = FoilForm()
     motorForm = MotorForm()
     propellerForm = PropellerForm()
     controllerForm = ControllerForm()
+
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            buildForm = BuildForm(request.POST)
+            boardForm = BoardForm(request.POST)
+            foilForm = FoilForm(request.POST)
+            motorForm = MotorForm(request.POST)
+            propellerForm = PropellerForm(request.POST)
+            controllerForm = ControllerForm(request.POST)
+            if buildForm.is_valid() and boardForm.is_valid() and foilForm.is_valid() and motorForm.is_valid() and propellerForm.is_valid() and controllerForm.is_valid():
+                #get form object but dont save
+                build = buildForm.save(commit=False)
+                board = boardForm.save()
+                foil = foilForm.save()
+                motor = motorForm.save()
+                prop = propellerForm.save()
+                controller = controllerForm.save()
+                # setting foreign keys
+                build.board = board
+                build.foil = foil
+                build.motor = motor
+                build.propeller = prop
+                build.controller = controller
+                build.save()
+                title = buildForm.cleaned_data.get('title')
+                messages.success(request, 'Build "' + title + '" was created')
+                return redirect('')
+
     return render(request, "plotter/add_build.html", context={'boardForm':boardForm, 'foilForm':foilForm, 'motorForm':motorForm, 'propellerForm':propellerForm, 'controllerForm':controllerForm, 'buildForm':buildForm})
