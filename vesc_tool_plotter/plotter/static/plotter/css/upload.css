@@ -2,6 +2,13 @@
   padding: 0 48px;
 }
 
+.container {
+  display:flex;
+  flex-flow:column;
+  justify-content: center;
+  align-content: center;
+}
+
 .flex-row {
   flex: 1;
   display: flex;

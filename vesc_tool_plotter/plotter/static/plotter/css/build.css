@@ -2,6 +2,13 @@ textarea {
   height:92px !important;
 }
 
+.container {
+  display:flex;
+  flex-flow:column;
+  justify-content: center;
+  align-content: center;
+}
+
 .flex-col {
   align-self:center;
   flex: 1;

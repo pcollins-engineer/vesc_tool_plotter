@@ -9,6 +9,13 @@
   margin-top: 50px;
 }
 
+.container {
+  display:flex;
+  flex-flow:column;
+  justify-content: center;
+  align-content: center;
+}
+
 #selectContainer{
   padding: 10px 0 10px 25px;
   flex: 2 1 0;

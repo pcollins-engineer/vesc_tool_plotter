@@ -1,32 +1,110 @@
 {% extends "./base.html" %}
 {% block title %}Profile{% endblock title %}
 {% block head_css %}
-  <link rel="stylesheet" href="../../static/plotter/css/base.css">
+  <link rel="stylesheet" href="../../static/plotter/css/profile.css">
 {% endblock head_css %}
 {% block content %}
-  <h1> {{ username }} profile </h1>
-  <li><a href="/logout" class="teal-effect teal lighten-2 btn">logout</a></li>
-  {% for build in builds %}
-    <h4>{{ build.title }}</h4>
-    <div class="section">
-      <h6>{{build.board.title}}</h6>
-      <p>{{build.bmotoroard.description}}</p>
+  ADD CONTAINER WITH MARGIN AROUND TILE CONTAINERS TO CONTAIN CONTENT NEATLY
+  <div class="container profile">
+    <div class="prof-info l-elevation z-depth-2">
+      <h6> {{ username }} </h6>
+      <a href="/logout" class="teal-effect teal lighten-2 btn">logout</a>
     </div>
-    <div class="section">
-      <h6>{{build.foil.title}}</h6>
-      <p>{{build.foil.description}}</p>
+    <div class="build-feed">
+      {% for build in builds %}
+        <div class="build m-elevation z-depth-3">
+          <div class="tile">
+            <div class="build-title">
+              {{build.title}}
+            </div>
+            <div class="build-description">
+              {{build.description}}
+            </div>
+          </div>
+          <div class="build-parts">
+            <div class="board tile">
+              <i class="material-icons small">airline_seat_flat</i>
+              <div class="tile-container">
+                <div class="tile-title">
+                  {{build.board.title}}
+                </div>
+                <div class="tile-body">
+                  {{build.board.description}}
+                </div>
+              </div>
+            </div>
+            <div class="foil tile">
+              <i class="material-icons small">flight_takeoff</i>
+              <div class="tile-container">
+                <div class="tile-title">
+                  {{build.foil.title}}
+                </div>
+                <div class="tile-body">
+                  {{build.foil.description}}
+                </div>
+              </div>
+            </div>
+            <div class="motor tile">
+              <i class="material-icons small">iso</i>
+              <div class="tile-container">
+                <div class="tile-title">
+                  {{build.motor.title}}
+                </div>
+                <div class="tile-body">
+                  {{build.motor.description}}
+                </div>
+              </div>
+            </div>
+            <div class="controller tile">
+              <i class="material-icons small">videogame_asset</i>
+              <div class="tile-container">
+                <div class="tile-title">
+                  {{build.controller.title}}
+                </div>
+                <div class="tile-body">
+                  {{build.controller.description}}
+                </div>
+              </div>
+            </div>
+            <div class="propeller tile">
+              <i class="material-icons small">toys</i>
+              <div class="tile-container">
+                <div class="tile-title">
+                  {{build.propeller.title}}
+                </div>
+                <div class="tile-body">
+                  {{build.propeller.description}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
     </div>
-    <div class="section">
-      <h6>{{build.motor.title}}</h6>
-      <p>{{build.motor.description}}</p>
-    </div>
-    <div class="section">
-      <h6>{{build.controller.title}}</h6>
-      <p>{{build.controller.description}}</p>
-    </div>
-    <div class="section">
-      <h6>{{build.propeller.title}}</h6>
-      <p>{{build.propeller.description}}</p>
-    </div>
-  {% endfor %}
+  </div>
 {% endblock content %}
+
+
+<!-- {% for build in builds %}
+  <h4>{{ build.title }}</h4>
+  <div class="section">
+    <h6>{{build.board.title}}</h6>
+    <p>{{build.bmotoroard.description}}</p>
+  </div>
+  <div class="section">
+    <h6>{{build.foil.title}}</h6>
+    <p>{{build.foil.description}}</p>
+  </div>
+  <div class="section">
+    <h6>{{build.motor.title}}</h6>
+    <p>{{build.motor.description}}</p>
+  </div>
+  <div class="section">
+    <h6>{{build.controller.title}}</h6>
+    <p>{{build.controller.description}}</p>
+  </div>
+  <div class="section">
+    <h6>{{build.propeller.title}}</h6>
+    <p>{{build.propeller.description}}</p>
+  </div>
+{% endfor %} -->

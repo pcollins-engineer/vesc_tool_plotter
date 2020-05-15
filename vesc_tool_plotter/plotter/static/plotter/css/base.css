@@ -10,11 +10,7 @@ h1{
 }
 
 body .container {
-  display:flex;
-  flex-flow:column;
   margin-bottom: 50px;
-  justify-content: center;
-  align-content: center;
 }
 
 textarea{
@@ -40,10 +36,10 @@ textarea{
 .high {
   color: rgba(255,255,255,0.87);
 }
-
+/* 
 .medium {
   color: rgba(255,255,255,0.6);
-}
+} */
 
 .disabled{
   color: rgba(255,255,255,0.38);
