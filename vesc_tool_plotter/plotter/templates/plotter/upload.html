@@ -41,11 +41,6 @@
                   {% csrf_token %}
                   {{ rideForm }}
                 </div>
-                <select class="form-control" id="make">
-                  {% for build in builds %}
-                    <option value='{{build.id}}'>{{ build.title }}</option>
-                  {% endfor %}
-                </select>
                 <div class="section"><button class="btn teal-effect teal lighten-2" type="submit">Graph<i class="material-icons right">multiline_chart</i></button></div>
                 {% if not user.is_authenticated %}
                 <p> Your data will not be saved. Please log-in to save your ride. </p>

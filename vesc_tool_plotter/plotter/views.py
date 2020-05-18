@@ -62,10 +62,9 @@ def parse_file(request):
 
 def upload(request):
     rideForm = RideForm()
-    builds = []
     if request.user.is_authenticated:
-        current_user = request.user
-        builds = Build.objects.filter(author=current_user.id)
+        user_id = request.user.id
+        rideForm.fields["build"].queryset = Build.objects.filter(author=user_id)
         if request.method == 'POST':
             print("ride here")
             rideForm = RideForm(request.POST)
@@ -76,7 +75,7 @@ def upload(request):
                 messages.success(request, 'Ride ' + rideTitle + ' was created')
                 # handle_uploaded_file(request.FILES["file"])
 
-    return render(request, "plotter/upload.html", context={'accepted_data_set':ACCEPTED_DATA_SET, 'rideForm': rideForm, 'builds':builds })
+    return render(request, "plotter/upload.html", context={'accepted_data_set':ACCEPTED_DATA_SET, 'rideForm': rideForm })
 
 def graph(request):
     send_data = parse_file(request)
