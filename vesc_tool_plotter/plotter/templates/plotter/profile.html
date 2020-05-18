@@ -32,7 +32,14 @@
           <div class="build m-elevation z-depth-3">
             <div class="build-tile">
               <div class="build-title">
-                <h6>{{build.title}}</h6>
+                {% if username == user.get_username %}
+                  <div class="build-title-header">
+                    <h6>{{build.title}}</h6>
+                    <a href="#" class="btn"><i class="material-icons small">edit</i></a>
+                  </div>
+                {% else %}
+                  <h6>{{build.title}}</h6>
+                {% endif %}
                 <p>{{username}}</p>
                 <p>{{build.date_added}}</p>
               </div>
@@ -46,6 +53,9 @@
                 <div class="tile-header">
                   <h6>Board</h6>
                   <i class="material-icons small">airline_seat_flat</i>
+                  {% if username == user.get_username %}
+                    <a href="#" class="btn"><i class="material-icons small">edit</i></a>
+                  {% endif %}
                 </div>
                 <div class="tile-container">
                   <div class="tile-title">
@@ -60,6 +70,9 @@
                 <div class="tile-header">
                   <h6>Foil</h6>
                   <i class="material-icons small">flight_takeoff</i>
+                  {% if username == user.get_username %}
+                    <a href="#" class="btn"><i class="material-icons small">edit</i></a>
+                  {% endif %}
                 </div>
                 <div class="tile-container">
                   <div class="tile-title">
@@ -74,6 +87,9 @@
                 <div class="tile-header">
                   <h6>Motor</h6>
                   <i class="material-icons small">iso</i>
+                  {% if username == user.get_username %}
+                    <a href="#" class="btn"><i class="material-icons small">edit</i></a>
+                  {% endif %}
                 </div>
                 <div class="tile-container">
                   <div class="tile-title">
@@ -88,6 +104,9 @@
                 <div class="tile-header">
                   <h6>Controller</h6>
                   <i class="material-icons small">videogame_asset</i>
+                  {% if username == user.get_username %}
+                    <a href="#" class="btn"><i class="material-icons small">edit</i></a>
+                  {% endif %}
                 </div>
                 <div class="tile-container">
                   <div class="tile-title">
@@ -102,6 +121,9 @@
                 <div class="tile-header">
                   <h6>Propeller</h6>
                   <i class="material-icons small">toys</i>
+                  {% if username == user.get_username %}
+                    <a href="#" class="btn"><i class="material-icons small">edit</i></a>
+                  {% endif %}
                 </div>
                 <div class="tile-container">
                   <div class="tile-title">

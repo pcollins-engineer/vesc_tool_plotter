@@ -1,9 +1,10 @@
 import csv
 import json
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.contrib import messages
-from .models import CsvRow, Build, Ride
+from .models import CsvRow, Build, Ride, Foil, Board, Motor, Controller, Propeller
 from .forms import FoilForm, BoardForm, MotorForm, PropellerForm, ControllerForm, RideForm, BuildForm
 
 ACCEPTED_DATA_SET = {
@@ -84,11 +85,8 @@ def profile(request, username):
     rides = Ride.objects.filter(rider=user_id)
     return render(request, "plotter/profile.html", context={"username": username, "builds":builds, "rides":rides})
 
+@login_required(login_url='/login/')
 def add_build(request):
-    if not request.user.is_authenticated:
-        messages.warning(request, 'You need to be logged in to create a build')
-        return redirect('accounts:login')
-
     buildForm = BuildForm(prefix='build')
     boardForm = BoardForm(prefix='board')
     foilForm = FoilForm(prefix='foil')
@@ -107,7 +105,6 @@ def add_build(request):
             if buildForm.is_valid() and boardForm.is_valid() and foilForm.is_valid() and motorForm.is_valid() and propellerForm.is_valid() and controllerForm.is_valid():
                 #get form object but dont save
                 build = buildForm.save(commit=False)
-                print(build)
                 board = boardForm.save()
                 foil = foilForm.save()
                 motor = motorForm.save()
@@ -126,3 +123,7 @@ def add_build(request):
                 return redirect('/build')
 
     return render(request, "plotter/add_build.html", context={'boardForm':boardForm, 'foilForm':foilForm, 'motorForm':motorForm, 'propellerForm':propellerForm, 'controllerForm':controllerForm, 'buildForm':buildForm})
+
+def edit_build(request, username, build, form):
+    build = get_object_or_404(Build, id=build.id)
+    return render(request, "plotter/profile.html", {})

@@ -17,7 +17,7 @@
   margin-left:auto;
   margin-right:auto;
   color: rgba(255,255,255,0.6);
-  border-bottom: 1px solid rgba(70,219,172,0.4);
+  border-bottom: 1px solid rgba(70,219,172,1);
 }
 
 .feed-header h1{
@@ -32,13 +32,14 @@
   border-radius: 5px;
   justify-content: left;
   padding:10px 30px 20px 30px;
+  color: rgba(255,255,255,0.6);
   /* border-right: 1px solid rgba(70,219,172,0.4); */
 }
 
 .prof-header{
   flex:1;
   display:flex;
-  border-bottom: 1px solid rgba(255,255,255,1)
+  border-bottom: 1px solid rgba(255,255,255,0.6);
 }
 
 .prof-info ul li{
@@ -155,6 +156,25 @@
 
 .build-title h6{
   margin:0;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.build-title a{
+  background: transparent;
+  box-shadow:none;
+  color: rgba(255,255,255,0.87);
+}
+
+.build-title a:hover{
+  background: rgba(0,0,0,0.2);
+}
+
+.build-title-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: right;
 }
 
 .build-description{
@@ -170,10 +190,22 @@
   justify-content: center;
   align-items: center;
   margin-right:5px;
+  height:100%;
 }
 
 .tile-header h6{
   margin:0;
+}
+
+.tile-header a{
+  margin-top:auto;
+  background: transparent;
+  box-shadow:none;
+  color: black;
+}
+
+.tile-header a:hover{
+  background: rgba(0,0,0,0.2);
 }
 
 .tile-title{

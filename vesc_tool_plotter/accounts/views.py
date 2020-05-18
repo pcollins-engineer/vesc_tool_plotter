@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponseRedirect
 from .models import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
@@ -22,17 +22,24 @@ def registerPage(request):
 	return render(request, 'accounts/register.html', context)
 
 def loginPage(request):
+	next = ""
+	if request.GET:
+		next = request.GET['next']
 	if request.method == 'POST':
 		username = request.POST.get('username')
 		password = request.POST.get('password')
 		user = authenticate(request, username=username, password=password)
+		print(next)
 		if user is not None:
 			login(request, user)
-			return redirect('/upload')
+			if next == "":
+				return redirect('/upload')
+			else:
+				return HttpResponseRedirect(next)
 		else:
 			messages.info(request, 'Username or Password is incorrect')
-	context = {}
-	return render(request, 'accounts/login.html', context)
+	context = {"next":next}
+	return render_to_response(request, 'accounts/login.html', context)
 
 def logoutUser(request):
 	logout(request)
