@@ -4,107 +4,154 @@
   <link rel="stylesheet" href="../../static/plotter/css/profile.css">
 {% endblock head_css %}
 {% block content %}
-  ADD CONTAINER WITH MARGIN AROUND TILE CONTAINERS TO CONTAIN CONTENT NEATLY
+  <div class="feed-header">
+    <h1> Builds & Rides</h1>
+  </div>
   <div class="container profile">
-    <div class="prof-info l-elevation z-depth-2">
-      <h6> {{ username }} </h6>
-      <a href="/logout" class="teal-effect teal lighten-2 btn">logout</a>
+    <div class="prof-container">
+      <div class="prof-info l-elevation z-depth-2">
+        <div class="prof-header">
+          <h6> {{ username }}'s Profile</h6>
+        </div>
+        <ul>
+          <li>Builds: {{builds.count}}</li>
+          <li>Rides: {{num_rides}}</li>
+        </ul>
+        {% if user.is_authenticated %}
+          <a href="/logout" class="teal-effect teal lighten-2 btn">logout</a>
+        {% endif %}
+      </div>
     </div>
     <div class="build-feed">
-      {% for build in builds %}
-        <div class="build m-elevation z-depth-3">
-          <div class="tile">
-            <div class="build-title">
-              {{build.title}}
+      <div class="feed-body">
+        {% for build in builds %}
+        <div id="{{build.title}}" class="build-container scrollspy">
+          <div class="build-header">
+            <h2>"{{build.title}}"</h2>
+          </div>
+          <div class="build m-elevation z-depth-3">
+            <div class="build-tile">
+              <div class="build-title">
+                <h6>{{build.title}}</h6>
+                <p>{{username}}</p>
+                <p>{{build.date_added}}</p>
+              </div>
+              <h6> Notes: </h6>
+              <div class="build-description">
+                {{build.description}}
+              </div>
             </div>
-            <div class="build-description">
-              {{build.description}}
+            <div class="build-parts">
+              <div class="board tile">
+                <div class="tile-header">
+                  <h6>Board</h6>
+                  <i class="material-icons small">airline_seat_flat</i>
+                </div>
+                <div class="tile-container">
+                  <div class="tile-title">
+                    {{build.board.title}}
+                  </div>
+                  <div class="tile-body">
+                    {{build.board.description}}
+                  </div>
+                </div>
+              </div>
+              <div class="foil tile">
+                <div class="tile-header">
+                  <h6>Foil</h6>
+                  <i class="material-icons small">flight_takeoff</i>
+                </div>
+                <div class="tile-container">
+                  <div class="tile-title">
+                    {{build.foil.title}}
+                  </div>
+                  <div class="tile-body">
+                    {{build.foil.description}}
+                  </div>
+                </div>
+              </div>
+              <div class="motor tile">
+                <div class="tile-header">
+                  <h6>Motor</h6>
+                  <i class="material-icons small">iso</i>
+                </div>
+                <div class="tile-container">
+                  <div class="tile-title">
+                    {{build.motor.title}}
+                  </div>
+                  <div class="tile-body">
+                    {{build.motor.description}}
+                  </div>
+                </div>
+              </div>
+              <div class="controller tile">
+                <div class="tile-header">
+                  <h6>Controller</h6>
+                  <i class="material-icons small">videogame_asset</i>
+                </div>
+                <div class="tile-container">
+                  <div class="tile-title">
+                    {{build.controller.title}}
+                  </div>
+                  <div class="tile-body">
+                    {{build.controller.description}}
+                  </div>
+                </div>
+              </div>
+              <div class="propeller tile">
+                <div class="tile-header">
+                  <h6>Propeller</h6>
+                  <i class="material-icons small">toys</i>
+                </div>
+                <div class="tile-container">
+                  <div class="tile-title">
+                    {{build.propeller.title}}
+                  </div>
+                  <div class="tile-body">
+                    {{build.propeller.description}}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="build-parts">
-            <div class="board tile">
-              <i class="material-icons small">airline_seat_flat</i>
-              <div class="tile-container">
-                <div class="tile-title">
-                  {{build.board.title}}
+          <div class="rides">
+            <h4>Rides</h4>
+            <ul class="collapsible">
+              <p class="ride-date"> May 16th, 2020 </p>
+              <li>
+                <div class="collapsible-header">
+                  Ride
+                  <i class="material-icons">motorcycle</i>
                 </div>
-                <div class="tile-body">
-                  {{build.board.description}}
+                <div class="collapsible-body">
+                  Ride here
                 </div>
-              </div>
-            </div>
-            <div class="foil tile">
-              <i class="material-icons small">flight_takeoff</i>
-              <div class="tile-container">
-                <div class="tile-title">
-                  {{build.foil.title}}
-                </div>
-                <div class="tile-body">
-                  {{build.foil.description}}
-                </div>
-              </div>
-            </div>
-            <div class="motor tile">
-              <i class="material-icons small">iso</i>
-              <div class="tile-container">
-                <div class="tile-title">
-                  {{build.motor.title}}
-                </div>
-                <div class="tile-body">
-                  {{build.motor.description}}
-                </div>
-              </div>
-            </div>
-            <div class="controller tile">
-              <i class="material-icons small">videogame_asset</i>
-              <div class="tile-container">
-                <div class="tile-title">
-                  {{build.controller.title}}
-                </div>
-                <div class="tile-body">
-                  {{build.controller.description}}
-                </div>
-              </div>
-            </div>
-            <div class="propeller tile">
-              <i class="material-icons small">toys</i>
-              <div class="tile-container">
-                <div class="tile-title">
-                  {{build.propeller.title}}
-                </div>
-                <div class="tile-body">
-                  {{build.propeller.description}}
-                </div>
-              </div>
-            </div>
+              </li>
+            </ul>
           </div>
         </div>
-      {% endfor %}
+        {% endfor %}
+      </div>
     </div>
+    <div class="hide-on-small-only sidebar">
+     <ul class="table-of-contents">
+       {% for build in builds %}
+       <li><a href="#{{build.title}}">{{build.title}}</a></li>
+       {% endfor %}
+     </ul>
+   </div>
   </div>
 {% endblock content %}
-
-
-<!-- {% for build in builds %}
-  <h4>{{ build.title }}</h4>
-  <div class="section">
-    <h6>{{build.board.title}}</h6>
-    <p>{{build.bmotoroard.description}}</p>
-  </div>
-  <div class="section">
-    <h6>{{build.foil.title}}</h6>
-    <p>{{build.foil.description}}</p>
-  </div>
-  <div class="section">
-    <h6>{{build.motor.title}}</h6>
-    <p>{{build.motor.description}}</p>
-  </div>
-  <div class="section">
-    <h6>{{build.controller.title}}</h6>
-    <p>{{build.controller.description}}</p>
-  </div>
-  <div class="section">
-    <h6>{{build.propeller.title}}</h6>
-    <p>{{build.propeller.description}}</p>
-  </div>
-{% endfor %} -->
+{% block footer_scripts %}
+  <script type="text/javascript" src='../../static/plotter/js/base.js'></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.collapsible');
+      var instances = M.Collapsible.init(elems, {});
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+      var elems = document.querySelectorAll('.scrollspy');
+      var instances = M.ScrollSpy.init(elems, {throttle:300, scrollOffset:150});
+    });
+  </script>
+{% endblock footer_scripts %}

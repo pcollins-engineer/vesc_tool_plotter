@@ -56,6 +56,7 @@ class Build(models.Model):
     title = models.CharField('build title', max_length=50)
     description = models.TextField('build description', null=True, max_length=200)
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='build')
+    date_added = models.DateField('date uploaded', False, True) # Automatically sets
     foil = models.ForeignKey(Foil, on_delete=models.CASCADE, null=True, related_name='build')
     board = models.ForeignKey(Board, on_delete=models.CASCADE, null=True, related_name='build')
     motor = models.ForeignKey(Motor, on_delete=models.CASCADE, null=True, related_name='build')

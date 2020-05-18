@@ -1,6 +1,7 @@
 import csv
 import json
-from django.shortcuts import render, HttpResponse, redirect
+from django.contrib.auth.models import User
+from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.contrib import messages
 from .models import CsvRow, Build, Ride
 from .forms import FoilForm, BoardForm, MotorForm, PropellerForm, ControllerForm, RideForm, BuildForm
@@ -78,8 +79,10 @@ def graph(request):
     return render(request, "plotter/graph.html", context={"mydata": send_data})
 
 def profile(request, username):
-    builds = Build.objects.filter(author=request.user)
-    return render(request, "plotter/profile.html", context={"username": username, "builds":builds})
+    user_id = get_object_or_404(User, username=username).pk
+    builds = Build.objects.filter(author=user_id)
+    rides = Ride.objects.filter(rider=user_id)
+    return render(request, "plotter/profile.html", context={"username": username, "builds":builds, "rides":rides})
 
 def add_build(request):
     if not request.user.is_authenticated:
