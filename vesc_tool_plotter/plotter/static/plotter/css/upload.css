@@ -65,6 +65,10 @@ textarea {
   height:92px !important;
 }
 
+select {
+  display: block;
+}
+
 .modal {
   color: black;
 }

@@ -62,6 +62,7 @@ def parse_file(request):
 
 def upload(request):
     rideForm = RideForm()
+    builds = []
     if request.user.is_authenticated:
         current_user = request.user
         builds = Build.objects.filter(author=current_user.id)
