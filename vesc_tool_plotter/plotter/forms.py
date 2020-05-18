@@ -31,7 +31,7 @@ class ControllerForm(ModelForm):
 class RideForm(ModelForm):
     class Meta:
         model = models.Ride
-        fields = ['title', 'description', 'ride_date', 'location', 'file']
+        fields = ['title', 'description', 'ride_date', 'location', 'build']
 
 class BuildForm(ModelForm):
     class Meta:
@@ -43,14 +43,14 @@ class BuildForm(ModelForm):
                 attrs={'placeholder': 'Enter description here'}),
         }
 
-class BuildSelectForm(ModelForm):
-    allBuilds = forms.ModelChoiceField(queryset=Build.objects.all())
-   
-    def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop('request', None)
-        super(BuildSelectForm, self).__init__(*args, **kwargs)
-
-    def clean_name(self):
-        if self.cleaned_data['name'] != self.request.user.name:
-            raise forms.ValidationError("The name is not the same.")
-        return self.cleaned_data['name']
+# class BuildSelectForm(Form):
+#     allBuilds = forms.ModelChoiceField(queryset=Build.objects.all())
+#
+#     def __init__(self, *args, **kwargs):
+#         self.request = kwargs.pop('request', None)
+#         super(BuildSelectForm, self).__init__(*args, **kwargs)
+#
+#     def clean_name(self):
+#         if self.cleaned_data['name'] != self.request.user.name:
+#             raise forms.ValidationError("The name is not the same.")
+#         return self.cleaned_data['name']
