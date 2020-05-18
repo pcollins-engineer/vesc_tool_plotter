@@ -1,5 +1,6 @@
 from django import forms
 from django.forms import ModelForm
+from .models import Build
 from . import models
 
 class FoilForm(ModelForm):
@@ -41,3 +42,15 @@ class BuildForm(ModelForm):
             'description': forms.Textarea(
                 attrs={'placeholder': 'Enter description here'}),
         }
+
+class BuildSelectForm(ModelForm):
+    allBuilds = forms.ModelChoiceField(queryset=Build.objects.all())
+   
+    def __init__(self, *args, **kwargs):
+        self.request = kwargs.pop('request', None)
+        super(BuildSelectForm, self).__init__(*args, **kwargs)
+
+    def clean_name(self):
+        if self.cleaned_data['name'] != self.request.user.name:
+            raise forms.ValidationError("The name is not the same.")
+        return self.cleaned_data['name']

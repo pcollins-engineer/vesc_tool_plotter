@@ -4,8 +4,13 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.contrib import messages
+<<<<<<< HEAD
 from .models import CsvRow, Build, Ride, Foil, Board, Motor, Controller, Propeller
 from .forms import FoilForm, BoardForm, MotorForm, PropellerForm, ControllerForm, RideForm, BuildForm
+=======
+from .models import CsvRow, Build, Ride
+from .forms import FoilForm, BoardForm, MotorForm, PropellerForm, ControllerForm, RideForm, BuildForm, BuildSelectForm
+>>>>>>> 7eafa6f23c4e9b315dd59432334ff45cdb4845e8
 
 ACCEPTED_DATA_SET = {
     "temp_motor",
@@ -62,18 +67,20 @@ def parse_file(request):
 
 def upload(request):
     rideForm = RideForm()
+    buildSelectForm = BuildSelectForm(request=request)
 
     if request.user.is_authenticated:
         if request.method == 'POST':
             print("ride here")
             rideForm = RideForm(request.POST, request.FILES)
+            buildSelectForm = buildSelectForm(request.POST)
             if rideForm.is_valid():
                 rideForm.save()
                 rideTitle = rideForm.cleaned_data.get('title')
                 messages.success(request, 'Ride ' + rideTitle + ' was created')
                 handle_uploaded_file(request.FILES["file"])
 
-    return render(request, "plotter/upload.html", context={'accepted_data_set':ACCEPTED_DATA_SET, 'rideForm': rideForm })
+    return render(request, "plotter/upload.html", context={'accepted_data_set':ACCEPTED_DATA_SET, 'rideForm': rideForm, 'buildSelectForm': buildSelectForm })
 
 def graph(request):
     send_data = parse_file(request)
