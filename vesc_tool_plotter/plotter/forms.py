@@ -32,6 +32,9 @@ class RideForm(ModelForm):
     class Meta:
         model = models.Ride
         fields = ['title', 'description', 'ride_date', 'location', 'build']
+        widgets = {
+        'ride_date': forms.DateInput(format=('%m/%d/%Y'), attrs={'class':'', 'placeholder':'Select a date', 'type':'date'}),
+        }
 
 class BuildForm(ModelForm):
     class Meta:
