@@ -44,7 +44,6 @@ def parse_file(request, ride_id):
                 counter += 1
 
         print(rowMap)
-        print(dataMap)
 
         # O(nRows*mdataMapkeys)
         data = []
@@ -89,6 +88,21 @@ def upload(request):
 
 def graph(request, ride_id):
 
+    header_list = [
+    "ms_today",
+    "temp_motor",
+    "current_motor",
+    "current_in",
+    "d_axis_current",
+    "q_axis_current",
+    "erpm",
+    "duty_cycle",
+    "amp_hours_used",
+    "amp_hours_charged",
+    "watt_hours_used",
+    "watt_hours_charged"
+    ]
+
     template_data = {}
     data = []
     csvData = CsvRow.objects.filter(ride=ride_id)
@@ -98,7 +112,7 @@ def graph(request, ride_id):
         data.append(rowData)
 
     template_data = {
-        "header": list(ACCEPTED_DATA_SET),
+        "header": header_list,
         "data": data
     }
 

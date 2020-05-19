@@ -122,7 +122,7 @@
                     chart.options.data[i-1].toolTipContent = null;
                 } else {
                     chart.options.data[i-1].visible = true;
-                    chart.options.data[i-1].toolTipContent = "<span style='\"'color: {color};'\"'>{name}</span>: <strong>{y}</strong>";;
+                    chart.options.data[i-1].toolTipContent = "<span style='\"'color: {color};'\"'>{name}</span>: <strong>{y}</strong>";
                 }
             }
         }
@@ -142,7 +142,6 @@
     // Runs when the generate button is clicked.  Calls generateChart with the selected elements
     $("#generateButton").click(function() {
         var selected = displayData()
-        console.log(selected);
         generateChart(selected);
     })
 
@@ -152,6 +151,14 @@
           $(this).prop('checked', true)
         })
     })
+
+    // Select all
+    $(".checkboxes").each(function() {
+      $(this).prop('checked', true)
+    })
+    var selected = displayData()
+    console.log(selected);
+    generateChart(selected);
 
   })
   </script>
