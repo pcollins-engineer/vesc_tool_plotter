@@ -90,7 +90,7 @@ class Ride(models.Model):
 
 class CsvRow(models.Model):
     ride = models.ForeignKey(Ride, on_delete=models.CASCADE, related_name='row')
-    ms_time = models.IntegerField()
+    ms_today = models.IntegerField()
     temp_motor = models.DecimalField(max_digits=10, decimal_places=4, null=True)
     current_motor = models.DecimalField(max_digits=10, decimal_places=4, null=True)
     current_in = models.DecimalField(max_digits=10, decimal_places=4, null=True)
@@ -105,3 +105,6 @@ class CsvRow(models.Model):
 
     def create_row(self):
         print('row created')
+
+    def getAllFields(self):
+        return [str(self.ms_today), str(self.temp_motor), str(self.current_motor), str(self.current_in), str(self.d_axis_current), str(self.q_axis_current), str(self.erpm), str(self.duty_cycle), str(self.amp_hours_used), str(self.amp_hours_used), str(self.watt_hours_used), str(self.watt_hours_charged)]

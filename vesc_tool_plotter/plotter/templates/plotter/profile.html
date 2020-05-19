@@ -136,21 +136,23 @@
               </div>
             </div>
           </div>
-          <div class="rides">
-            <h4>Rides</h4>
-            <ul class="collapsible">
-              <p class="ride-date"> May 16th, 2020 </p>
-              <li>
-                <div class="collapsible-header">
-                  Ride
-                  <i class="material-icons">motorcycle</i>
-                </div>
-                <div class="collapsible-body">
-                  Ride here
-                </div>
-              </li>
-            </ul>
-          </div>
+          {% for ride in rides %}
+            <div class="rides">
+              <h4>{{ride.build}}</h4>
+              <ul class="collapsible">
+                <p class="ride-date"> {{ride.ride_date}} </p>
+                <li>
+                  <div class="collapsible-header">
+                    Ride
+                    <i class="material-icons">motorcycle</i>
+                  </div>
+                  <div class="collapsible-body">
+                    {{ride.description}}
+                  </div>
+                </li>
+              </ul>
+            </div>
+          {% endfor %}
         </div>
         {% endfor %}
       </div>
