@@ -20,7 +20,7 @@
 .flex-row-top{
   flex: 1;
   border-radius:5px;
-  margin:24px 0;
+  margin:24px 0 48px 0;
 }
 
 .header{
@@ -31,7 +31,7 @@
   flex: 4 1 0;
   padding:24px;
   margin-right:24px;
-  border: 1px solid #009688;
+  /* border: 1px solid #009688; */
   justify-content:center;
   align-content:center;
 }
@@ -41,6 +41,7 @@
   border-radius: 5px;
   justify-content:center;
   align-content:center;
+  border: 1px solid #4db6ac;
 }
 
 .disabled ul {
@@ -67,10 +68,19 @@ textarea {
 
 select {
   display: block;
+  background-color: rgba(44,44,44);
+  border-radius: 0;
+  border: 1px solid #4db6ac;
+  color: rgba(255,255,255,0.87);
 }
 
 .modal {
   color: black;
+}
+
+.file-upload{
+  margin-top: 20px;
+  color: rgba(255,255,255,0.87);
 }
 @media only screen and (min-width: 992px){
   .flex-row{

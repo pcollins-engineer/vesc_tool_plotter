@@ -9,17 +9,15 @@ from .forms import FoilForm, BoardForm, MotorForm, PropellerForm, ControllerForm
 
 ACCEPTED_DATA_SET = {
     "ms_today",
-    "temp_motor",
+    "input_voltage",
+    "temp_mos_max",
     "current_motor",
     "current_in",
-    "d_axis_current",
-    "q_axis_current",
     "erpm",
     "duty_cycle",
     "amp_hours_used",
-    "amp_hours_charged",
     "watt_hours_used",
-    "watt_hours_charged"
+    "tachometer"
 }
 
 def handle_uploaded_file(f):
@@ -78,7 +76,9 @@ def upload(request):
         if request.method == 'POST':
             rideForm = RideForm(request.POST)
             if rideForm.is_valid():
-                rideInfo = rideForm.save()
+                rideInfo = rideForm.save(commit=False)
+                rideInfo.rider = request.user
+                rideInfo.save()
                 handle_uploaded_file(request.FILES["file"])
                 parse_file(request, rideInfo.id)
                 urlPath = "/graph/" + str(rideInfo.id) + "/"
@@ -89,18 +89,16 @@ def upload(request):
 def graph(request, ride_id):
 
     header_list = [
-    "ms_today",
-    "temp_motor",
-    "current_motor",
-    "current_in",
-    "d_axis_current",
-    "q_axis_current",
-    "erpm",
-    "duty_cycle",
-    "amp_hours_used",
-    "amp_hours_charged",
-    "watt_hours_used",
-    "watt_hours_charged"
+        "ms_today",
+        "input_voltage",
+        "temp_mos_max",
+        "current_motor",
+        "current_in",
+        "erpm",
+        "duty_cycle",
+        "amp_hours_used",
+        "watt_hours_used",
+        "tachometer"
     ]
 
     template_data = {}
@@ -121,9 +119,10 @@ def graph(request, ride_id):
     return render(request, "plotter/graph.html", context={"mydata": send_data})
 
 def profile(request, username):
-    user_id = get_object_or_404(User, username=username).pk
-    builds = Build.objects.filter(author=user_id)
-    rides = Ride.objects.filter(rider=user_id)
+    current_user = get_object_or_404(User, username=username)
+    builds = Build.objects.filter(author=current_user)
+    rides = Ride.objects.filter(rider=current_user)
+    print(rides)
     return render(request, "plotter/profile.html", context={"username": username, "builds":builds, "rides":rides})
 
 @login_required(login_url='/login/')
@@ -168,3 +167,7 @@ def add_build(request):
 def edit_build(request, username, build, form):
     build = get_object_or_404(Build, id=build.id)
     return render(request, "plotter/profile.html", {})
+
+def users(request):
+    users = User.objects.all()
+    return render(request, "plotter/users.html", context={"users":users})

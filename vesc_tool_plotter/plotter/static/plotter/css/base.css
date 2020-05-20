@@ -11,10 +11,23 @@ h1{
 
 body .container {
   margin-bottom: 50px;
+  max-width:1920px;
 }
 
 textarea{
   color: rgba(255,255,255,0.87);
+}
+
+.btn-alt {
+  background-color: transparent !important;
+  color: #46dbac !important;
+  border: 1px solid #46dbac !important;
+  border-radius: 8px !important;
+  /* color: rgba(255,255,255,0.87) !important; */
+}
+
+.btn-alt:hover{
+  background-color: rgba(0,0,0,0.1) !important;
 }
 
 .blue-hover:hover{
@@ -36,7 +49,15 @@ textarea{
 .high {
   color: rgba(255,255,255,0.87);
 }
-/* 
+
+.feed-header{
+  color: rgba(255,255,255,0.6);
+  width:100%;
+  margin-left:auto;
+  margin-right:auto;
+  border-bottom: 1px solid #46dbac;
+}
+/*
 .medium {
   color: rgba(255,255,255,0.6);
 } */

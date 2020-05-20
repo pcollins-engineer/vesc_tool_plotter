@@ -34,10 +34,8 @@ textarea {
 }
 
 .collapsible .collapsible-header{
-  background-color: transparent;
+  /* background-color: transparent; */
   justify-content: space-between;
-  border-bottom: 1px solid #009688;
-  color: #009688;
 }
 
 .collapsible .collapsible-header:hover{
@@ -71,4 +69,36 @@ textarea {
 
 .select-dropdown.dropdown-content li.selected {
   background-color: rgba(66,66,66);
+}
+
+.board {
+  color: rgba(255,255,255,0.87);
+  background-color:#3F656F;
+}
+
+.foil {
+  color: rgba(255,255,255,0.87);
+  background-color: #7FA8AF;
+}
+
+.motor {
+  color: rgba(255,255,255,0.87);
+  background-color: #71AA8F;
+}
+
+.controller {
+  color: rgba(255,255,255,0.87);
+  background-color: #ABB4EF;
+}
+
+.propeller {
+  border-bottom: 1px solid #666BAF !important;
+  color: rgba(255,255,255,0.87);
+  background-color: #666BAF;
+}
+
+.collapsible .collapsible-header{
+  /* background-color: transparent; */
+  justify-content: space-between;
+  border-bottom: 1px solid lightgrey;
 }
