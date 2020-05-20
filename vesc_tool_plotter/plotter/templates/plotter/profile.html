@@ -33,7 +33,8 @@
                 {% if username == user.get_username %}
                   <div class="build-title-header">
                     <h6>{{build.title}}</h6>
-                    <a href="#" class="btn"><i class="material-icons small">edit</i></a>
+                    <a href="/build/{{build.id}}/edit" class="btn edit"><i class="material-icons small">edit</i></a>
+                    <a href="/build/{{build.id}}/delete" class="btn"><i class="material-icons small">delete</i></a>
                   </div>
                 {% else %}
                   <h6>{{build.title}}</h6>

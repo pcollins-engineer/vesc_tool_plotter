@@ -3,6 +3,15 @@ body {
   background-color: #212121;
   margin:0;
   padding:0;
+  font-family: "Helvetica Neue Light", "Helvetica Neue", ##COPYRIGHTED CHANGE BEFORE USE
+  Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+@font-face {
+  font-family: 'Trajan Pro Regular';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Trajan Pro Regular'), url('TrajanPro-Regular.woff') format('woff');
 }
 
 h1{

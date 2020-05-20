@@ -99,26 +99,6 @@ class CsvRow(models.Model):
     duty_cycle = models.DecimalField(max_digits=14, decimal_places=4, null=True)
     amp_hours_used = models.DecimalField(max_digits=14, decimal_places=4, null=True)
     watt_hours_used = models.DecimalField(max_digits=14, decimal_places=4, null=True)
-    tachometer = models.DecimalField(max_digits=14, decimal_places=4, null=True)
 
     def getAllFields(self):
-        return [str(self.ms_today), str(self.input_voltage), str(self.temp_mos_max), str(self.current_motor), str(self.current_in), str(self.erpm), str(self.duty_cycle), str(self.amp_hours_used), str(self.watt_hours_used), str(self.tachometer)]
-
-
-# class CsvRow(models.Model):
-#     ride = models.ForeignKey(Ride, on_delete=models.CASCADE, related_name='row')
-#     ms_today = models.IntegerField()
-#     temp_motor = models.DecimalField(max_digits=10, decimal_places=4, null=True)
-#     current_motor = models.DecimalField(max_digits=10, decimal_places=4, null=True)
-#     current_in = models.DecimalField(max_digits=10, decimal_places=4, null=True)
-#     d_axis_current = models.DecimalField(max_digits=10, decimal_places=4, null=True)
-#     q_axis_current = models.DecimalField(max_digits=10, decimal_places=4, null=True)
-#     erpm = models.DecimalField(max_digits=10, decimal_places=4, null=True)
-#     duty_cycle = models.DecimalField(max_digits=10, decimal_places=4, null=True)
-#     amp_hours_used = models.DecimalField(max_digits=10, decimal_places=4, null=True)
-#     amp_hours_charged = models.DecimalField(max_digits=10, decimal_places=4, null=True)
-#     watt_hours_used = models.DecimalField(max_digits=10, decimal_places=4, null=True)
-#     watt_hours_charged = models.DecimalField(max_digits=10, decimal_places=4, null=True)
-#
-#     def getAllFields(self):
-#         return [str(self.ms_today), str(self.temp_motor), str(self.current_motor), str(self.current_in), str(self.d_axis_current), str(self.q_axis_current), str(self.erpm), str(self.duty_cycle), str(self.amp_hours_used), str(self.amp_hours_used), str(self.watt_hours_used), str(self.watt_hours_charged)]
+        return [str(self.ms_today), str(self.input_voltage), str(self.temp_mos_max), str(self.current_motor), str(self.current_in), str(self.erpm), str(self.duty_cycle), str(self.amp_hours_used), str(self.watt_hours_used)]

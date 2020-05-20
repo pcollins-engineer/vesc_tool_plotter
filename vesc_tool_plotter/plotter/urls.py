@@ -8,6 +8,6 @@ urlpatterns = [
     path("graph/<int:ride_id>/", views.graph, name="graph"),
     path("profile/<username>/", views.profile, name="profile"),
     path("build/", views.add_build, name="add_build"),
-    path(r'^profile/<username>/<build>/<form>/edit$', views.edit_build, name="edit_build"),
-    path("users/", views.users, name="users"),
+    path("build/<int:build_id>/edit", views.edit_build, name="edit_build"),
+    path("build/<int:build_id>/delete", views.delete_build, name="delete_build"),
 ]

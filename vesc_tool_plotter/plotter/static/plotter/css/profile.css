@@ -103,6 +103,10 @@
   margin-bottom:15px;
 }
 
+.build-container{
+  margin-bottom:100px;
+}
+
 .build-header{
   display:flex;
   justify-content: center;
@@ -178,9 +182,13 @@
 
 .build-title-header {
   display: flex;
-  justify-content: space-between;
   align-items: right;
 }
+
+.build-title-header .edit{
+  margin-left: auto;
+}
+
 
 .build-description{
   flex:1;

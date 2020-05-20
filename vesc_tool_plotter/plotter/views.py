@@ -17,7 +17,6 @@ ACCEPTED_DATA_SET = {
     "duty_cycle",
     "amp_hours_used",
     "watt_hours_used",
-    "tachometer"
 }
 
 def handle_uploaded_file(f):
@@ -48,17 +47,18 @@ def parse_file(request, ride_id):
         for row in reader:
             rowData = []
             for key in dataMap:
+                if key == "temp_mos_max":
+                    row[key] = row[key]*1.8 + 32
                 rowData.append(row[key])
-            if request.user.is_authenticated:
-                newRow = CsvRow()
-                for field in ACCEPTED_DATA_SET:
-                    if field in rowMap:
-                        setattr(newRow, field, rowData[rowMap[field]])
-                    else:
-                        setattr(newRow, field, None)
-                ride = Ride.objects.filter(id=ride_id)
-                newRow.ride = ride[0]
-                newRow.save()
+            newRow = CsvRow()
+            for field in ACCEPTED_DATA_SET:
+                if field in rowMap:
+                    setattr(newRow, field, rowData[rowMap[field]])
+                else:
+                    setattr(newRow, field, None)
+            ride = Ride.objects.filter(id=ride_id)
+            newRow.ride = ride[0]
+            newRow.save()
             data.append(rowData)
 
         template_data = {
@@ -68,6 +68,7 @@ def parse_file(request, ride_id):
         send_data = json.dumps(template_data)
         return send_data
 
+@login_required(login_url='/login/')
 def upload(request):
     rideForm = RideForm()
     if request.user.is_authenticated:
@@ -87,18 +88,18 @@ def upload(request):
     return render(request, "plotter/upload.html", context={'accepted_data_set':ACCEPTED_DATA_SET, 'rideForm': rideForm })
 
 def graph(request, ride_id):
+    ride = get_object_or_404(Ride, id=ride_id)
 
-    header_list = [
+    header_display = [
         "ms_today",
-        "input_voltage",
-        "temp_mos_max",
-        "current_motor",
-        "current_in",
-        "erpm",
-        "duty_cycle",
-        "amp_hours_used",
-        "watt_hours_used",
-        "tachometer"
+        "Voltage",
+        "Temperature",
+        "Motor Current",
+        "Battery Current",
+        "RPM",
+        "Throttle",
+        "AMP Hours",
+        "Watt Hours",
     ]
 
     template_data = {}
@@ -110,19 +111,18 @@ def graph(request, ride_id):
         data.append(rowData)
 
     template_data = {
-        "header": header_list,
+        "header": header_display,
         "data": data
     }
 
     send_data = json.dumps(template_data)
 
-    return render(request, "plotter/graph.html", context={"mydata": send_data})
+    return render(request, "plotter/graph2.html", context={"mydata": send_data, "ride":ride})
 
 def profile(request, username):
     current_user = get_object_or_404(User, username=username)
     builds = Build.objects.filter(author=current_user)
     rides = Ride.objects.filter(rider=current_user)
-    print(rides)
     return render(request, "plotter/profile.html", context={"username": username, "builds":builds, "rides":rides})
 
 @login_required(login_url='/login/')
@@ -161,12 +161,69 @@ def add_build(request):
                 title = buildForm.cleaned_data.get('title')
                 messages.success(request, 'Build "' + title + '" was created')
                 return redirect('/build')
+    context={'boardForm':boardForm, 'foilForm':foilForm, 'motorForm':motorForm, 'propellerForm':propellerForm, 'controllerForm':controllerForm, 'buildForm':buildForm}
+    return render(request, "plotter/add_build.html", context)
 
-    return render(request, "plotter/add_build.html", context={'boardForm':boardForm, 'foilForm':foilForm, 'motorForm':motorForm, 'propellerForm':propellerForm, 'controllerForm':controllerForm, 'buildForm':buildForm})
+@login_required(login_url='/login/')
+def edit_build(request, build_id):
 
-def edit_build(request, username, build, form):
-    build = get_object_or_404(Build, id=build.id)
-    return render(request, "plotter/profile.html", {})
+    build = get_object_or_404(Build, id=build_id)
+
+    if build.author != request.user:
+        redirect('/profile' + build.author.username/ + '/')
+
+    buildForm = BuildForm(instance=build)
+    boardForm = BoardForm(instance=build.board, prefix='board')
+    foilForm = FoilForm(instance=build.foil, prefix='foil')
+    motorForm = MotorForm(instance=build.motor, prefix='motor')
+    propellerForm = PropellerForm(instance=build.propeller, prefix='propeller')
+    controllerForm = ControllerForm(instance=build.controller, prefix='controller')
+
+
+    if request.method == 'POST':
+        buildForm = BuildForm(request.POST, instance=build)
+        boardForm = BoardForm(request.POST,instance=build.board, prefix='board')
+        foilForm = FoilForm(request.POST,instance=build.foil, prefix='foil')
+        motorForm = MotorForm(request.POST,instance=build.motor, prefix='motor')
+        propellerForm = PropellerForm(request.POST, instance=build.propeller, prefix='propeller')
+        controllerForm = ControllerForm(request.POST,instance=build.controller, prefix='controller')
+
+        if buildForm.is_valid() and boardForm.is_valid() and foilForm.is_valid() and motorForm.is_valid() and propellerForm.is_valid() and controllerForm.is_valid():
+            #get form object but dont save
+            build = buildForm.save(commit=False)
+            board = boardForm.save()
+            foil = foilForm.save()
+            motor = motorForm.save()
+            prop = propellerForm.save()
+            controller = controllerForm.save()
+            # setting foreign keys
+            build.author = request.user
+            build.board = board
+            build.foil = foil
+            build.motor = motor
+            build.propeller = prop
+            build.controller = controller
+            build.save()
+            title = buildForm.cleaned_data.get('title')
+            messages.success(request, 'Build "' + title + '" was updated')
+            return redirect('/build')
+
+    context={'boardForm':boardForm, 'foilForm':foilForm, 'motorForm':motorForm, 'propellerForm':propellerForm, 'controllerForm':controllerForm, 'buildForm':buildForm}
+    return render(request, "plotter/add_build.html", context)
+
+@login_required(login_url='/login/')
+def delete_build(request, build_id):
+    build = get_object_or_404(Build, id=build_id)
+
+    if build.author != request.user:
+        redirect('/profile' + build.author.username/ + '/')
+
+    if request.method == 'POST':
+        build.delete()
+        redirect('/profile' + request.user.username/ + '/')
+
+    context={"build":build}
+    return render(request, "plotter/delete.html", context)
 
 def users(request):
     users = User.objects.all()
