@@ -19,6 +19,11 @@ ACCEPTED_DATA_SET = {
     "watt_hours_used",
 }
 
+def index(request):
+    if request.user.is_authenticated:
+        return render(request, "plotter/authindex.html")
+    return render(request, "plotter/index.html")
+
 def handle_uploaded_file(f):
     with open("file.csv", "wb+") as destination:
         for chunk in f.chunks():

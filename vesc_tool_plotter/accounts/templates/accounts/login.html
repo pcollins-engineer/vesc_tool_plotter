@@ -3,9 +3,9 @@
 
 <head>
 	<title>Login</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 
 
 	<style>
@@ -15,55 +15,63 @@
 			padding: 0;
 			height: 100%;
 			background: #212121 !important;
+			font-family: "Helvetica Neue Light", "Helvetica Neue", ##COPYRIGHTED CHANGE BEFORE USE
+		  Helvetica, Arial, "Lucida Grande", sans-serif;
 		}
+
+		.container{
+			height: 100%;
+			display:flex;
+			justify-content: center;
+			align-items: center;
+		}
+
 		.user_card {
 			width: 350px;
-			margin-top: auto;
-			margin-bottom: auto;
-			background: #424242;
-			position: relative;
+			margin:auto;
+			margin-top:auto;
+			margin-bottom:auto;
+			background: rgba(44,44,44);
 			display: flex;
+			flex-flow:column;
 			justify-content: center;
-			flex-direction: column;
-			padding: 10px;
-			box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+			align-items: center;
+			padding: 24px 24px;
 			border-radius: 5px;
-
-		}
-
-		.form_container {
-			margin-top: 20px;
+			color: rgba(255,255,255,0.87);
 		}
 
 		#form-title{
-			color: #fff;
-
+			margin-bottom: 50px;
 		}
 
-		.login_btn {
+		.user_card h3{
+			margin: 0.3em 0;
+		}
+
+		.form-container {
 			width: 100%;
-			background: #26a69a !important;
-			color: white !important;
+			display: flex;
+			flex-flow:column;
+			justify-content: center;
+			align-items: center;
 		}
-		.login_btn:focus {
-			box-shadow: none !important;
-			outline: 0px !important;
+
+		.form-container input{
+			background-color: rgba(44,44,44) !important;
+			margin: 10px 0;
 		}
-		.login_container {
-			padding: 0 2rem;
+
+		.btn-container {
+			margin:10px;
+			width:100%;
+			display:flex;
+			justify-content: center;
 		}
-		.input-group-text {
-			background: #f7ba5b !important;
-			color: white !important;
-			border: 0 !important;
-			border-radius: 0.25rem 0 0 0.25rem !important;
-		}
-		.input_user,
-		.input_pass:focus {
-			box-shadow: none !important;
-			outline: 0px !important;
+		.btn-container input{
+			margin-left: auto;
+			margin-right: auto;
+			width:30%;
 		}
 
 		#messages{
@@ -76,46 +84,25 @@
 
 </head>
 <body>
-	<div class="container h-100">
-		<div class="d-flex justify-content-center h-100">
-			<div class="user_card">
-				{% for message in messages %}
-					<p id="messages">{{message}}</p>
-				{% endfor %}
-				<div class="d-flex justify-content-center">
-
-
-					<h3 id="form-title">Login</h3>
+	<div class="container">
+		<div class="user_card z-depth-3">
+			{% for message in messages %}
+				<p id="messages">{{message}}</p>
+			{% endfor %}
+			<h3 id="form-title">Login</h3>
+			<div class="form-container">
+				<form method="POST" action="/login/">
+					{% csrf_token %}
+					<label for="username">Username:</label>
+					<input type="text" name="username" placeholder="Password...">
+					<label for="password">Password:</label>
+					<input type="password" name="password" placeholder="Password...">
+	 				<div class="btn-container"><input class="btn teal-effect teal lighten-2" type="submit" value="Login"></div>
+				</form>
+				<div>
+					Don't have an account? <a href="{% url 'accounts:register' %}" class="ml-2">Sign Up</a>
 				</div>
-				<div class="d-flex justify-content-center form_container">
-					<form method="POST" action="/login/">
-						{% csrf_token %}
-						<div class="input-group mb-3">
-							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-user"></i></span>
-							</div>
-							<input type="text" name="username" placeholder="Username..." class="form-control">
-						</div>
-						<div class="input-group mb-2">
-							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-key"></i></span>
-							</div>
-								<input type="password" name="password" placeholder="Password..." class="form-control" >
-						</div>
-
-							<div class="d-flex justify-content-center mt-3 login_container">
-				 				<input class="btn login_btn" type="submit" value="Login">
-				   			</div>
-					</form>
-
-				</div>
-
-				<div class="mt-4">
-					<div class="d-flex justify-content-center links" style="color:white">
-						Don't have an account? <a href="{% url 'accounts:register' %}" class="ml-2">Sign Up</a>
-					</div>
-
-				</div>
+			</div>
 			</div>
 		</div>
 	</div>

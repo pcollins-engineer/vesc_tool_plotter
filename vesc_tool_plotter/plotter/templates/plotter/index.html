@@ -1,0 +1,15 @@
+{% extends "./base.html" %}
+{% block title %}Build{% endblock title %}
+{% block head_css %}
+  <link rel="stylesheet" href="../../static/plotter/css/index.css"/>
+{% endblock head_css %}
+{% block content %}
+  <div class="container">
+    <div class="section"><h1 class="center-align">e-Monitor</h1></div>
+    <div class="button-container m-elevation z-depth-3">
+      <p class="center-align"> This tool is used to track ride data from your electric hydrofoil. First, <a href="/register">create an account</a> so your data will be saved. You can then add a build with all the components you used on your latest ride. Once that is done, upload your data file and let our app handle the rest!</p>
+      <a href="/register" class="btn btn-alt">Register</a>
+      <a href="/login" class="btn btn-alt">Login</a>
+    </div>
+  </div>
+{% endblock content %}

@@ -29,13 +29,16 @@
   flex: 7 1 0;
   height:100%;
   margin-left:15px;
+  z-index:10000;
 }
 
 #chartContainer .cover{
-  height:10px;
-  width:30px;
+  height:15px;
+  width:60px;
   background-color: rgba(44,44,44);
   margin-top:auto;
+  position: relative;
+  top:605px;
 }
 
 #chartContainer a{
@@ -67,31 +70,4 @@
   color: rgba(255,255,255,0.6);
   padding: 12px 24px;
   border:none;
-}
-
-.collapsible-body .active{
-
-}
-
-.flex-row-top{
-  flex: 1;
-  margin-bottom:15px;
-  display:flex;
-  flex-flow: row;
-  padding:24px;
-}
-
-.ride-title{
-  flex:1;
-  display:flex;
-  flex-flow:column;
-}
-
-.ride-title p{
-  margin: 5px 0;
-  color: rgba(255,255,255,0.6);
-}
-
-.ride-title h6{
-  margin-bottom: 5px;
 }

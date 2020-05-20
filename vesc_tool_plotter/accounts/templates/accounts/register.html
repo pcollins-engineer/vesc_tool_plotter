@@ -6,6 +6,7 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
 	<style>
 		body,
@@ -19,7 +20,7 @@
 			width: 350px;
 			margin-top: auto;
 			margin-bottom: auto;
-			background: #424242;
+			background: rgba(44,44,44);
 			position: relative;
 			display: flex;
 			justify-content: center;
@@ -29,7 +30,8 @@
 			-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 			-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 			border-radius: 5px;
-
+			font-family: "Helvetica Neue Light", "Helvetica Neue", ##COPYRIGHTED CHANGE BEFORE USE
+		  Helvetica, Arial, "Lucida Grande", sans-serif;
 		}
 
 		.form_container {
@@ -69,7 +71,7 @@
 <body>
 	<div class="container h-100">
 		<div class="d-flex justify-content-center h-100">
-			<div class="user_card">
+			<div class="user_card z-depth-3">
 				<div class="d-flex justify-content-center">
 					<h3 id="form-title">Register</h3>
 				</div>
@@ -78,27 +80,15 @@
 					<form method="POST" action="">
 						{% csrf_token %}
 						<div class="input-group mb-3">
-							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-user"></i></span>
-							</div>
 							{{form.username}}
 						</div>
 						<div class="input-group mb-2">
-							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
-							</div>
 							{{form.email}}
 						</div>
 						<div class="input-group mb-2">
-							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-key"></i></span>
-							</div>
 							{{form.password1}}
 						</div>
 						<div class="input-group mb-2">
-							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-key"></i></span>
-							</div>
 							{{form.password2}}
 						</div>
 
