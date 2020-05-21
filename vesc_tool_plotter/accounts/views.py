@@ -33,7 +33,7 @@ def loginPage(request):
 		if user is not None:
 			login(request, user)
 			if next == "":
-				return redirect('/upload')
+				return redirect('/')
 			else:
 				return HttpResponseRedirect(next)
 		else:

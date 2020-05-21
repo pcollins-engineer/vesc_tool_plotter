@@ -60,6 +60,7 @@
 		.form-container input{
 			background-color: rgba(44,44,44) !important;
 			margin: 10px 0;
+			color:rgba(255,255,255,0.87);
 		}
 
 		.btn-container {
@@ -94,7 +95,7 @@
 				<form method="POST" action="/login/">
 					{% csrf_token %}
 					<label for="username">Username:</label>
-					<input type="text" name="username" placeholder="Password...">
+					<input type="text" name="username" placeholder="Username...">
 					<label for="password">Password:</label>
 					<input type="password" name="password" placeholder="Password...">
 	 				<div class="btn-container"><input class="btn teal-effect teal lighten-2" type="submit" value="Login"></div>

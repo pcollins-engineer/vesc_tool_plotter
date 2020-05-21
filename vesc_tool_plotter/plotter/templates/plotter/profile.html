@@ -120,37 +120,37 @@
               </div>
             </div>
           </div>
-          {% for ride in rides %}
-            <div class="rides">
+          <div class="rides">
+            <h4>Rides</h4>
+            <ul class="collapsible">
+            {% for ride in rides %}
               {% if ride.build == build %}
-              <h4>Rides</h4>
-                <ul class="collapsible">
-                  <p class="ride-date"> {{ride.pub_date}} </p>
-                  <li>
-                    <div class="collapsible-header">
-                      {{ride.title}}
-                      <i class="material-icons">motorcycle</i>
-                    </div>
-                    <div class="collapsible-body">
-                      <div class="ride-tile">
-                        <div class="ride-title">
-                            <div class="ride-title-header">
-                              <h6>{{ride.title}}</h6>
-                              <a href="/graph/{{ride.id}}" class="btn btn-alt">View Ride!</a>
-                            </div>
-                          <p>Rider: {{username}}</p>
-                          <p>Ride date: {{ride.ride_date}}</p>
-                        </div>
-                        <h6> Notes: </h6>
-                        <div class="ride-description">
-                          {{ride.description}}
-                        </div>
-                    </div>
-                  </li>
-                </ul>
+                <p class="ride-date"> {{ride.pub_date}} </p>
+                <li>
+                  <div class="collapsible-header">
+                    {{ride.title}}
+                    <i class="material-icons">motorcycle</i>
+                  </div>
+                  <div class="collapsible-body">
+                    <div class="ride-tile">
+                      <div class="ride-title">
+                          <div class="ride-title-header">
+                            <h6>{{ride.title}}</h6>
+                            <a href="/graph/{{ride.id}}" class="btn btn-alt">View Ride!</a>
+                          </div>
+                        <p>Rider: {{username}}</p>
+                        <p>Ride date: {{ride.ride_date}}</p>
+                      </div>
+                      <h6> Notes: </h6>
+                      <div class="ride-description">
+                        {{ride.description}}
+                      </div>
+                  </div>
+                </li>
               {% endif %}
-            </div>
-          {% endfor %}
+            {% endfor %}
+            </ul>
+          </div>
         </div>
         {% endfor %}
       </div>
