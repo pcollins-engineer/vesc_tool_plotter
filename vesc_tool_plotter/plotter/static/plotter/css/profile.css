@@ -11,7 +11,7 @@
 
 .prof-container{
   width:20%;
-  margin-top: 150px;
+  margin-top: 128px;
 }
 
 .feed-header{
@@ -59,9 +59,9 @@
 }
 
 .sidebar{
-  top:138px;
+  top:128px;
   position:sticky;
-  margin-top: 150px;
+  margin-top: 128px;
   width:20%;
   height:100%;
   display: flex;
@@ -303,6 +303,11 @@
 
 .propeller {
   background-color: #666BAF;
+  margin-bottom: 15px;
+}
+
+.battery {
+  background-color: #cf9eff;
   margin-bottom: none;
 }
 

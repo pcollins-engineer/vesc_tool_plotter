@@ -28,6 +28,11 @@ class ControllerForm(ModelForm):
         model = models.Controller
         fields = ['title', 'description']
 
+class BatteryForm(ModelForm):
+    class Meta:
+        model = models.Battery
+        fields = ['title', 'description']
+
 class RideForm(ModelForm):
     class Meta:
         model = models.Ride

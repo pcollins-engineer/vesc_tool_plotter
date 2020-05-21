@@ -52,6 +52,16 @@ class Controller(models.Model):
     class Meta:
         db_table = 'controllers'
 
+class Battery(models.Model):
+    title = models.CharField('battery title', max_length=50)
+    description = models.TextField('battery description', null=True, max_length=200)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        db_table = 'batteries'
+
 class Build(models.Model):
     title = models.CharField('build title', max_length=50)
     description = models.TextField('build description', null=True, max_length=200)
@@ -62,6 +72,7 @@ class Build(models.Model):
     motor = models.ForeignKey(Motor, on_delete=models.CASCADE, null=True, related_name='build')
     propeller = models.ForeignKey(Propeller, on_delete=models.CASCADE, null=True, related_name='build')
     controller = models.ForeignKey(Controller, on_delete=models.CASCADE, null=True, related_name='build')
+    battery = models.ForeignKey(Battery, on_delete=models.CASCADE, null=True, related_name='build')
 
     def __str__(self):
         return self.title

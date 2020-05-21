@@ -48,7 +48,7 @@
                   </li>
                   <li>
                     <div class="collapsible-header controller">
-                      Controller
+                      Motor Controller
                       <i class="material-icons">videogame_asset</i>
                     </div>
                     <div class="collapsible-body">
@@ -64,6 +64,16 @@
                     <div class="collapsible-body">
                       {% csrf_token %}
                       {{ propellerForm }}
+                    </div>
+                  </li>
+                  <li>
+                    <div class="collapsible-header battery">
+                      Battery
+                      <i class="material-icons">battery_charging_full</i>
+                    </div>
+                    <div class="collapsible-body">
+                      {% csrf_token %}
+                      {{ batteryForm }}
                     </div>
                   </li>
                 </ul>
