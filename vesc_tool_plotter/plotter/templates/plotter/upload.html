@@ -5,17 +5,15 @@
 {% endblock head_css %}
 {% block content %}
   <div class="container">
-    <div class="section feed-header"><h2 class="left-align">Add a Ride!</h2></div>
-    <div class="flex-row-top m-elevation z-depth-3">
-      <div class="header">
-        <p class="center-align"> When you upload a ride to e-Monitor, your ride data will be saved to our database. Upon logging-in you can view all rides and their corresponding builds in the "account" tab found in the upper-right corner. If you're not logged your data will not be saved.</p>
-      </div>
+    <div class="section feed-header"><h2 class="left-align">Upload Ride Data</h2></div>
+    <div >
+      <br>
     </div>
     <div class="flex-row">
       <div class="flex-col-left">
         <h4 class="left-align">Data Accepted</h4>
           <div class="disabled">
-            <p> Note: extraneous columns are allowed but will be parsed out and not saved in the database. </P>
+            <p> Extraneous columns are allowed but will not be saved.</P>
             {% if accepted_data_set %}
               <ul>
               {% for item in accepted_data_set %}

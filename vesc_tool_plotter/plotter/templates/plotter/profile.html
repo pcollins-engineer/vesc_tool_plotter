@@ -4,7 +4,7 @@
   <link rel="stylesheet" href="../../static/plotter/css/profile.css">
 {% endblock head_css %}
 {% block content %}
-  <div class="section feed-header"><h2 class="left-align">Builds and Rides</h2></div>
+  <div class="section feed-header"><h2 class="left-align">{{ username }}'s Profile</h2></div>
   <div class="container profile">
     <div class="prof-container">
       <div class="prof-info l-elevation z-depth-2">
@@ -25,7 +25,7 @@
         {% for build in builds %}
         <div id="{{build.title}}" class="build-container scrollspy">
           <div class="build-header">
-            <h2>"{{build.title}}"</h2>
+            <h2>{{build.title}}</h2>
           </div>
           <div class="build m-elevation z-depth-3">
             <div class="build-tile">
@@ -51,7 +51,7 @@
               <div class="board tile">
                 <div class="tile-header">
                   <h6>Board</h6>
-                  <i class="material-icons small">airline_seat_flat</i>
+                  <i class="material-icons small">crop_16_9</i>
                 </div>
                 <div class="tile-container">
                   <div class="tile-title">
@@ -79,7 +79,7 @@
               <div class="motor tile">
                 <div class="tile-header">
                   <h6>Motor</h6>
-                  <i class="material-icons small">iso</i>
+                  <i class="material-icons small">adjust</i>
                 </div>
                 <div class="tile-container">
                   <div class="tile-title">
@@ -93,7 +93,7 @@
               <div class="controller tile">
                 <div class="tile-header">
                   <h6>Controller</h6>
-                  <i class="material-icons small">keyboard</i>
+                  <i class="material-icons small">videogame_asset</i>
                 </div>
                 <div class="tile-container">
                   <div class="tile-title">
@@ -135,7 +135,7 @@
               <div class="remote tile">
                 <div class="tile-header">
                   <h6>Remote</h6>
-                  <i class="material-icons small">videogame_asset</i>
+                  <i class="material-icons small">settings_remote</i>
                 </div>
                 <div class="tile-container">
                   <div class="tile-title">
@@ -164,10 +164,10 @@
                       <div class="ride-title">
                           <div class="ride-title-header">
                             <h6>{{ride.title}}</h6>
-                            <a href="/graph/{{ride.id}}" class="btn btn-alt">View Ride!</a>
+                            <a href="/graph/{{ride.id}}" class="btn btn-alt">View Ride</a>
                           </div>
                         <p>Rider: {{username}}</p>
-                        <p>Ride date: {{ride.ride_date}}</p>
+                        <p>Date: {{ride.ride_date}}</p>
                       </div>
                       <h6> Notes: </h6>
                       <div class="ride-description">

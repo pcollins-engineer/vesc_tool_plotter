@@ -3,8 +3,8 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Foil(models.Model):
-    title = models.CharField('foil title', max_length=50)
-    description = models.TextField('foil description', null=True, max_length=200)
+    title = models.CharField('Title', max_length=50)
+    description = models.TextField('Description', null=True, max_length=200)
 
     def __str__(self):
         return self.title
@@ -13,8 +13,8 @@ class Foil(models.Model):
         db_table = 'foils'
 
 class Board(models.Model):
-    title = models.CharField('board title', max_length=50)
-    description = models.TextField('board description', null=True, max_length=200)
+    title = models.CharField('Title', max_length=50)
+    description = models.TextField('Description', null=True, max_length=200)
 
     def __str__(self):
         return self.title
@@ -23,8 +23,8 @@ class Board(models.Model):
         db_table = 'boards'
 
 class Motor(models.Model):
-    title = models.CharField('motor title', max_length=50)
-    description = models.TextField('motor description', null=True, max_length=200)
+    title = models.CharField('Title', max_length=50)
+    description = models.TextField('Description', null=True, max_length=200)
 
     def __str__(self):
         return self.title
@@ -33,8 +33,8 @@ class Motor(models.Model):
         db_table = 'motors'
 
 class Propeller(models.Model):
-    title = models.CharField('propeller title', max_length=50)
-    description = models.TextField('propeller description', null=True, max_length=200)
+    title = models.CharField('Title', max_length=50)
+    description = models.TextField('Description', null=True, max_length=200)
 
     def __str__(self):
         return self.title
@@ -43,8 +43,8 @@ class Propeller(models.Model):
         db_table = 'propellers'
 
 class Controller(models.Model):
-    title = models.CharField('controller title', max_length=50)
-    description = models.TextField('controller description', null=True, max_length=200)
+    title = models.CharField('Title', max_length=50)
+    description = models.TextField('Description', null=True, max_length=200)
 
     def __str__(self):
         return self.title
@@ -53,8 +53,8 @@ class Controller(models.Model):
         db_table = 'controllers'
 
 class Battery(models.Model):
-    title = models.CharField('battery title', max_length=50)
-    description = models.TextField('battery description', null=True, max_length=200)
+    title = models.CharField('Title', max_length=50)
+    description = models.TextField('Description', null=True, max_length=200)
 
     def __str__(self):
         return self.title
@@ -63,8 +63,8 @@ class Battery(models.Model):
         db_table = 'batteries'
 
 class Remote(models.Model):
-    title = models.CharField('remote title', max_length=50)
-    description = models.TextField('remote description', null=True, max_length=200)
+    title = models.CharField('Title', max_length=50)
+    description = models.TextField('Description', null=True, max_length=200)
 
     def __str__(self):
         return self.title
@@ -73,8 +73,8 @@ class Remote(models.Model):
         db_table = 'remotes'
 
 class Build(models.Model):
-    title = models.CharField('build title', max_length=50)
-    description = models.TextField('build description', null=True, max_length=200)
+    title = models.CharField('Title', max_length=50)
+    description = models.TextField('Description', null=True, max_length=200)
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='build')
     date_added = models.DateField('date uploaded', False, True) # Automatically sets
     foil = models.ForeignKey(Foil, on_delete=models.CASCADE, null=True, related_name='build')
@@ -94,10 +94,10 @@ class Build(models.Model):
 # Ride data for V 0.1
 class Ride(models.Model):
     rider = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='ride')
-    title = models.CharField('ride title', max_length=50)
-    description = models.TextField('ride description', null=True, max_length=200)
-    ride_date = models.DateField('date of ride')
-    location = models.CharField('location', null=True, max_length=50)
+    title = models.CharField('Title', max_length=50)
+    description = models.TextField('Description', null=True, max_length=200)
+    ride_date = models.DateField('Date')
+    location = models.CharField('Location', null=True, max_length=50)
     build = models.ForeignKey(Build, models.SET_NULL, null=True, related_name='ride')
     pub_date = models.DateField('date uploaded', False, True) # Automatically sets
     file = models.FileField(null=True);

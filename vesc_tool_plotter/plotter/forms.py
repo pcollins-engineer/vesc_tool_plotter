@@ -51,9 +51,9 @@ class BuildForm(ModelForm):
         model = models.Build
         fields = ['title', 'description']
         widgets = {
-            'title': forms.TextInput(attrs={'placeholder': 'e-Foil 1.0'}),
+            'title': forms.TextInput(attrs={'placeholder': ''}),
             'description': forms.Textarea(
-                attrs={'placeholder': 'Enter description here'}),
+                attrs={'placeholder': ''}),
         }
 
 # class BuildSelectForm(Form):

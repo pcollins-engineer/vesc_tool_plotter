@@ -46,6 +46,7 @@
     var importedData = '{{mydata|safe}}';
     var parsedData = JSON.parse(importedData)
     var header = parsedData.header
+
     var data = parsedData.data
     var timeStamp = data[0][0]
 
@@ -128,10 +129,11 @@
             horizontalAlign: "center",
             dockInsidePlotArea: false
         },
-        data: newData
+       data: newData
     });
 
-    chart.render();
+chart.render();
+
 
     function displayData(selected){
       if (selected.length > 0){
@@ -148,6 +150,8 @@
       console.log('display called')
       chart.render();
     }
+
+    //displayData([]);
      // Determines which data has been selected for viewing -> () => array
     $(".checkboxes").click(function() {
       var selectedData = []
@@ -157,6 +161,7 @@
         }
       })
       displayData(selectedData);
+      console.log(selectedData);
     })
 
     $("#selectAll").click(function() {
