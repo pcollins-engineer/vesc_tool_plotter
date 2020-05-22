@@ -49,6 +49,7 @@
 
     var data = parsedData.data
     var timeStamp = data[0][0]
+    var min = [Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity];
 
     var newData = [];
     var axisY = [];
@@ -65,6 +66,7 @@
             dataPoints: []
         })
         axisY.push({
+            minimum: 0,
             tickThickness: 0,
             tickLength: 0,
             lineThickness:0,
@@ -91,15 +93,25 @@
 
     // newData[k-1] matches k key:value pair of data[j]
     for(var j in data) {
+      if(j < (data.length-20)){
         for(var k in data[j]){
-            if (k != 0){
-                var newTime = (data[j][0] - timeStamp)/1000
-                newData[k-1].dataPoints.push({x:newTime, y:parseFloat(data[j][k])})
-            }
+          if (k > 0){
+              var newTime = (data[j][0] - timeStamp)/1000
+              if (min[k] > parseFloat(data[j][k])){
+                min[k] = parseFloat(data[j][k]);
+              }
+              newData[k-1].dataPoints.push({x:newTime, y:parseFloat(data[j][k])})
+          }
         }
+      }
     }
 
-    //
+    for (var l in axisY){
+      if(l!=0){
+        axisY[l-1].minimum = min[l]
+      }
+    }
+
     // FUNCTIONS
     // Generates chart
 
@@ -109,16 +121,6 @@
         theme:"dark2",
         backgroundColor: "#2c2c2c",
         borderRadius: "5px",
-        // title: {
-        //     text: "Ride Data",
-        //     padding:{
-        //       top:20
-        //     },
-        // },
-        // axisX: {
-        //     title: "Time",
-        //     suffix: "s"
-        // },
         axisY: axisY,
         toolTip: {
             shared: true
