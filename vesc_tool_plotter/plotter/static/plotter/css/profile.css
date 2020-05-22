@@ -302,12 +302,17 @@
 }
 
 .propeller {
-  background-color: #666BAF;
+  background-color: #a9d18c;
   margin-bottom: 15px;
 }
 
 .battery {
-  background-color: #cf9eff;
+  background-color: #77a5d4;
+  margin-bottom: 15px;
+}
+
+.remote {
+  background-color: #666BAF;
   margin-bottom: none;
 }
 

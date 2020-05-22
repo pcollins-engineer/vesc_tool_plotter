@@ -62,6 +62,16 @@ class Battery(models.Model):
     class Meta:
         db_table = 'batteries'
 
+class Remote(models.Model):
+    title = models.CharField('remote title', max_length=50)
+    description = models.TextField('remote description', null=True, max_length=200)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        db_table = 'remotes'
+
 class Build(models.Model):
     title = models.CharField('build title', max_length=50)
     description = models.TextField('build description', null=True, max_length=200)
@@ -73,6 +83,7 @@ class Build(models.Model):
     propeller = models.ForeignKey(Propeller, on_delete=models.CASCADE, null=True, related_name='build')
     controller = models.ForeignKey(Controller, on_delete=models.CASCADE, null=True, related_name='build')
     battery = models.ForeignKey(Battery, on_delete=models.CASCADE, null=True, related_name='build')
+    remote = models.ForeignKey(Remote, on_delete=models.CASCADE, null=True, related_name='build')
 
     def __str__(self):
         return self.title

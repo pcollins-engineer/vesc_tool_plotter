@@ -93,13 +93,18 @@ textarea {
 
 .propeller {
   color: rgba(255,255,255,0.87);
-  background-color: #666BAF;
+  background-color: #a9d18c;
 }
 
 .battery {
-  border-bottom: 1px solid #cf9eff !important;
   color: rgba(255,255,255,0.87);
-  background-color: #cf9eff;
+  background-color: #77a5d4;
+}
+
+.remote {
+  border-bottom: 1px solid #666BAF !important;666BAF
+  color: rgba(255,255,255,0.87);
+  background-color: #666BAF;
 }
 
 .collapsible .collapsible-header{

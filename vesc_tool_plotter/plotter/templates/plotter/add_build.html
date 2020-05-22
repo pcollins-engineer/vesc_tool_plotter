@@ -49,7 +49,7 @@
                   <li>
                     <div class="collapsible-header controller">
                       Motor Controller
-                      <i class="material-icons">videogame_asset</i>
+                      <i class="material-icons">keyboard</i>
                     </div>
                     <div class="collapsible-body">
                       {% csrf_token %}
@@ -74,6 +74,16 @@
                     <div class="collapsible-body">
                       {% csrf_token %}
                       {{ batteryForm }}
+                    </div>
+                  </li>
+                  <li>
+                    <div class="collapsible-header remote">
+                      Remote
+                      <i class="material-icons">videogame_asset</i>
+                    </div>
+                    <div class="collapsible-body">
+                      {% csrf_token %}
+                      {{ remoteForm }}
                     </div>
                   </li>
                 </ul>

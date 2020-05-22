@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.contrib import messages
-from .models import CsvRow, Build, Ride, Foil, Board, Motor, Controller, Propeller, Battery
-from .forms import FoilForm, BoardForm, MotorForm, PropellerForm, ControllerForm, RideForm, BuildForm, BatteryForm
+from .models import CsvRow, Build, Ride, Foil, Board, Motor, Controller, Propeller, Battery, Remote
+from .forms import FoilForm, BoardForm, MotorForm, PropellerForm, ControllerForm, RideForm, BuildForm, BatteryForm, RemoteForm
 
 ACCEPTED_DATA_SET = {
     "ms_today",
@@ -139,6 +139,7 @@ def add_build(request):
     propellerForm = PropellerForm(prefix='propeller')
     controllerForm = ControllerForm(prefix='controller')
     batteryForm = BatteryForm(prefix='battery')
+    remoteForm = RemoteForm(prefix='remote')
 
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -149,7 +150,8 @@ def add_build(request):
             propellerForm = PropellerForm(request.POST, prefix='propeller')
             controllerForm = ControllerForm(request.POST, prefix='controller')
             batteryForm = BatteryForm(request.POST, prefix='battery')
-            if buildForm.is_valid() and boardForm.is_valid() and foilForm.is_valid() and motorForm.is_valid() and propellerForm.is_valid() and controllerForm.is_valid() and batteryForm.is_valid():
+            remoteForm = RemoteForm(request.POST, prefix='remote')
+            if buildForm.is_valid() and boardForm.is_valid() and foilForm.is_valid() and motorForm.is_valid() and propellerForm.is_valid() and controllerForm.is_valid() and batteryForm.is_valid() and remoteForm.is_valid():
                 #get form object but dont save
                 build = buildForm.save(commit=False)
                 board = boardForm.save()
@@ -158,6 +160,7 @@ def add_build(request):
                 prop = propellerForm.save()
                 controller = controllerForm.save()
                 battery = batteryForm.save()
+                remote = remoteForm.save()
                 # setting foreign keys
                 build.author = request.user
                 build.board = board
@@ -166,11 +169,12 @@ def add_build(request):
                 build.propeller = prop
                 build.controller = controller
                 build.battery = battery
+                build.remote = remote
                 build.save()
                 title = buildForm.cleaned_data.get('title')
                 messages.success(request, 'Build "' + title + '" was created')
                 return redirect('/build')
-    context={'boardForm':boardForm, 'foilForm':foilForm, 'motorForm':motorForm, 'propellerForm':propellerForm, 'controllerForm':controllerForm, 'buildForm':buildForm, 'batteryForm':batteryForm}
+    context={'boardForm':boardForm, 'foilForm':foilForm, 'motorForm':motorForm, 'propellerForm':propellerForm, 'controllerForm':controllerForm, 'buildForm':buildForm, 'batteryForm':batteryForm, 'remoteForm':remoteForm}
     return render(request, "plotter/add_build.html", context)
 
 @login_required(login_url='/login/')
@@ -188,6 +192,7 @@ def edit_build(request, build_id):
     propellerForm = PropellerForm(instance=build.propeller, prefix='propeller')
     controllerForm = ControllerForm(instance=build.controller, prefix='controller')
     batteryForm = BatteryForm(instance=build.battery, prefix='battery')
+    remoteForm = RemoteForm(instance=build.remote, prefix='remote')
 
 
     if request.method == 'POST':
@@ -199,8 +204,8 @@ def edit_build(request, build_id):
         controllerForm = ControllerForm(request.POST,instance=build.controller, prefix='controller')
         batteryForm = BatteryForm(request.POST, instance=build.battery, prefix='battery')
 
-        if buildForm.is_valid() and boardForm.is_valid() and foilForm.is_valid() and motorForm.is_valid() and propellerForm.is_valid() and controllerForm.is_valid() and batteryForm.is_valid():
-            #get form object but dont save
+        if buildForm.is_valid() and boardForm.is_valid() and foilForm.is_valid() and motorForm.is_valid() and propellerForm.is_valid() and controllerForm.is_valid() and batteryForm.is_valid() and remoteForm.is_valid():
+            #get form object but dont save and remoteForm.is_valid()
             build = buildForm.save(commit=False)
             board = boardForm.save()
             foil = foilForm.save()
@@ -208,6 +213,7 @@ def edit_build(request, build_id):
             prop = propellerForm.save()
             controller = controllerForm.save()
             battery = batteryForm.save()
+            remote = remoteForm.save()
             # setting foreign keys
             build.author = request.user
             build.board = board
@@ -216,12 +222,13 @@ def edit_build(request, build_id):
             build.propeller = prop
             build.controller = controller
             build.battery = battery
+            build.remote = remote
             build.save()
             title = buildForm.cleaned_data.get('title')
             messages.success(request, 'Build "' + title + '" was updated')
             return redirect('/build')
 
-    context={'boardForm':boardForm, 'foilForm':foilForm, 'motorForm':motorForm, 'propellerForm':propellerForm, 'controllerForm':controllerForm, 'buildForm':buildForm, 'batteryForm':batteryForm}
+    context={'boardForm':boardForm, 'foilForm':foilForm, 'motorForm':motorForm, 'propellerForm':propellerForm, 'controllerForm':controllerForm, 'buildForm':buildForm, 'batteryForm':batteryForm, 'remoteForm':remoteForm}
     return render(request, "plotter/add_build.html", context)
 
 @login_required(login_url='/login/')

@@ -33,6 +33,11 @@ class BatteryForm(ModelForm):
         model = models.Battery
         fields = ['title', 'description']
 
+class RemoteForm(ModelForm):
+    class Meta:
+        model = models.Remote
+        fields = ['title', 'description']
+
 class RideForm(ModelForm):
     class Meta:
         model = models.Ride
